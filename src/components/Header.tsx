@@ -42,7 +42,7 @@ export default function Header() {
         <Link href="/homepage" className="flex items-center gap-3 group">
           <AppLogo size={36} />
           <span className="font-extrabold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
-            Planets<span className="text-accent">.</span>
+            POM<span className="text-accent">.</span>
           </span>
         </Link>
 
