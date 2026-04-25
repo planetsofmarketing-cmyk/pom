@@ -2,6 +2,22 @@
 
 import React, { useState } from 'react';
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  service: string;
+  budget: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  service?: string;
+}
+
 const services = [
   'SEO & Search Marketing',
   'Social Media Marketing',
@@ -58,7 +74,7 @@ const contactInfo = [
 ];
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
@@ -67,16 +83,101 @@ export default function ContactForm() {
     budget: '',
     message: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [cooldownEnd, setCooldownEnd] = useState<number | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.service) {
+      newErrors.service = 'Please select a service';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Backend integration point — connect to CRM/email service here
-    setSubmitted(true);
+    setSubmitError('');
+
+    // Check cooldown
+    if (cooldownEnd && Date.now() < cooldownEnd) {
+      setSubmitError('Please wait before submitting another inquiry.');
+      return;
+    }
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          service: formData.service,
+          budget: formData.budget,
+          message: formData.message,
+          website: honeypot, // Honeypot field
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit form');
+      }
+
+      // Success - set cooldown and reset form
+      setCooldownEnd(Date.now() + 30000);
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        budget: '',
+        message: '',
+      });
+      setErrors({});
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -194,8 +295,11 @@ export default function ContactForm() {
                         onChange={handleChange}
                         required
                         placeholder="Priya Reddy"
-                        className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
+                        className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.name ? 'border-red-500' : 'border-border'}`}
                       />
+                      {errors.name && (
+                        <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
@@ -208,8 +312,11 @@ export default function ContactForm() {
                         onChange={handleChange}
                         required
                         placeholder="priya@yourbrand.in"
-                        className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
+                        className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.email ? 'border-red-500' : 'border-border'}`}
                       />
+                      {errors.email && (
+                        <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -253,13 +360,16 @@ export default function ContactForm() {
                       value={formData.service}
                       onChange={handleChange}
                       required
-                      className="w-full bg-[#12152A] border-b border-border py-3 text-foreground focus:border-primary focus:outline-none transition-colors text-sm appearance-none rounded-none"
+                      className={`w-full bg-[#12152A] border-b py-3 text-foreground focus:border-primary focus:outline-none transition-colors text-sm appearance-none rounded-none ${errors.service ? 'border-red-500' : 'border-border'}`}
                     >
                       <option value="" disabled>Select a planet...</option>
                       {services.map((s) => (
                         <option key={s} value={s}>{s}</option>
                       ))}
                     </select>
+                    {errors.service && (
+                      <p className="text-red-400 text-xs mt-1">{errors.service}</p>
+                    )}
                   </div>
 
                   {/* Budget */}
@@ -297,15 +407,47 @@ export default function ContactForm() {
                     />
                   </div>
 
+                  {/* Honeypot field - hidden from users */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+                    aria-hidden="true"
+                  />
+
+                  {/* Error message */}
+                  {submitError && (
+                    <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                      {submitError}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full py-4 rounded-xl font-bold text-foreground text-base transition-all duration-300 mt-2 hover:shadow-[0_0_40px_rgba(124,58,237,0.5)]"
+                    disabled={isLoading || (cooldownEnd !== null && Date.now() < cooldownEnd)}
+                    className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 mt-2 hover:shadow-[0_0_40px_rgba(124,58,237,0.5)] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-none"
                     style={{
                       background: 'linear-gradient(135deg, #7C3AED, #A855F7, #F97316)',
                       boxShadow: '0 0 20px rgba(124,58,237,0.3)',
                     }}
                   >
-                    Launch My Brand Into Orbit 🚀
+                    {isLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Launching...
+                      </span>
+                    ) : cooldownEnd && Date.now() < cooldownEnd ? (
+                      'Submitted Successfully!'
+                    ) : (
+                      'Launch My Brand Into Orbit 🚀'
+                    )}
                   </button>
 
                   <p className="text-xs text-muted-foreground text-center">

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import AppLogo from '@/components/ui/AppLogo';
 
 const navLinks = [
-  { label: 'Home', href: '/homepage' },
+  { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
   { label: 'Blog', href: '/blog' },
@@ -39,7 +39,7 @@ export default function Header() {
     >
     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
       {/* Logo */}
-      <Link href="/homepage" className="flex items-center gap-3 group">
+      <Link href="/" className="flex items-center gap-3 group">
         <AppLogo size={36} />
         <span className="font-extrabold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
           POM<span className="text-accent">.</span>
