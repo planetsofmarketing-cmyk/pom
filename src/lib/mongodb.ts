@@ -1,13 +1,4 @@
-import dns from 'node:dns';
 import { MongoClient, Db } from 'mongodb';
-
-// Fix for 'querySrv ECONNREFUSED' errors on certain networks/Windows setups
-// This forces Node.js to use Google's DNS servers for SRV record resolution
-try {
-  dns.setServers(['8.8.8.8', '8.8.4.4']);
-} catch (error) {
-  console.warn('Failed to set DNS servers:', error);
-}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
