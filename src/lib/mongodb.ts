@@ -14,7 +14,7 @@ export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db
     return { client: cachedClient, db: cachedDb };
   }
 
-  const client = new MongoClient(MONGODB_URI as string, {
+  const client = new MongoClient("mongodb+srv://planetsofmarketing:planetsofmarketing@cluster0.dyzezuc.mongodb.net/pom", {
     connectTimeoutMS: 10000,
     serverSelectionTimeoutMS: 10000,
   });
