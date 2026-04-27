@@ -59,8 +59,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Email',
-    value: 'hello@planetsofmarketing.in',
-    href: 'mailto:hello@planetsofmarketing.in',
+    value: 'planetsofmarketing@gmail.com',
+    href: 'mailto:planetsofmarketing@gmail.com',
   },
   {
     icon: (
