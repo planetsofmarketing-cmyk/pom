@@ -17,11 +17,43 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-  title: 'Planets of Marketing — Launch Your Brand Into Orbit',
-  description: 'Planets of Marketing is a full-funnel digital marketing agency in Hyderabad. SEO, paid ads, social media, and brand strategy that drives real results.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:4028'),
+  title: {
+    default: 'Planets of Marketing | Digital Marketing Agency Hyderabad',
+    template: '%s | Planets of Marketing',
+  },
+  description: 'Planets of Marketing is a premier full-funnel digital marketing agency in Hyderabad, India. We specialize in SEO, Google Ads, Facebook/Instagram advertising, social media management, brand strategy, and web development. Drive real business results with data-driven marketing solutions tailored for your growth.',
+  keywords: ['digital marketing agency', 'SEO company Hyderabad', 'Google Ads management', 'social media marketing', 'brand strategy', 'web development', 'performance marketing', 'PPC advertising', 'online marketing', 'marketing agency India'],
+  authors: [{ name: 'Planets of Marketing' }],
+  creator: 'Planets of Marketing',
+  publisher: 'Planets of Marketing',
+  openGraph: {
+    title: 'Planets of Marketing | Digital Marketing Agency Hyderabad',
+    description: 'Premier full-funnel digital marketing agency in Hyderabad. SEO, paid ads, social media, and brand strategy that drives real results.',
+    url: 'https://planetsofmarketing.com',
+    siteName: 'Planets of Marketing',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Planets of Marketing | Digital Marketing Agency',
+    description: 'Premier full-funnel digital marketing agency in Hyderabad. SEO, paid ads, social media, and brand strategy.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
-    icon: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
 };
 

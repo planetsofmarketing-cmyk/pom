@@ -200,7 +200,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
         <svg className="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />

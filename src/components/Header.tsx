@@ -40,10 +40,10 @@ export default function Header() {
     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 group">
-        <AppLogo size={36} />
-        <span className="font-extrabold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
+        <AppLogo size={56} />
+        {/* <span className="font-extrabold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
           POM<span className="text-accent">.</span>
-        </span>
+        </span> */}
       </Link>
 
       {/* Desktop Nav */}
