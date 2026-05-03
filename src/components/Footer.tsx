@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import AppLogo from '@/components/ui/AppLogo';
 
 // Custom SVG icons for social media
@@ -35,7 +36,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-3 max-w-xs">
             <Link href="/homepage" className="flex items-center gap-3">
-              <AppLogo size={32} />
+              <Image src="/assets/images/logo.png" alt="Planets of Marketing Logo" width={32} height={32} className="w-8 h-auto" />
               <span className="font-extrabold text-base tracking-tight text-foreground">
                 Planets of Marketing
               </span>

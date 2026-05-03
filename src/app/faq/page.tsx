@@ -169,11 +169,10 @@ export default function FAQPage() {
               <button
                 key={cat.label}
                 onClick={() => setActiveCategory(i)}
-                className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
-                  activeCategory === i
+                className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === i
                     ? 'text-foreground'
                     : 'text-muted-foreground hover:text-foreground bg-transparent'
-                }`}
+                  }`}
                 style={activeCategory === i ? { background: `${cat.color}20`, border: `1px solid ${cat.color}50`, color: cat.color } : { border: '1px solid transparent' }}
               >
                 <span>{cat.icon}</span>
@@ -223,7 +222,7 @@ export default function FAQPage() {
                   Book a Free Strategy Call
                 </Link>
                 <a
-                  href="mailto:hello@planetsofmarketing.com"
+                  href="mailto:@planetsofmarketing@gmail.com"
                   className="px-7 py-3.5 rounded-full border border-border text-muted-foreground font-semibold text-sm hover:border-primary/50 hover:text-foreground transition-all duration-300"
                 >
                   Email Us Directly

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import AppLogo from '@/components/ui/AppLogo';
 
 const navLinks = [
@@ -40,10 +41,7 @@ export default function Header() {
     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 group">
-        <AppLogo size={56} />
-        {/* <span className="font-extrabold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors duration-300">
-          POM<span className="text-accent">.</span>
-        </span> */}
+        <Image src="/assets/images/logo.png" alt="Planets of Marketing Logo" width={56} height={56} className="w-14 h-auto" />
       </Link>
 
       {/* Desktop Nav */}
