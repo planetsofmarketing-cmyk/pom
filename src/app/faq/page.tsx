@@ -135,27 +135,31 @@ export default function FAQPage() {
           <div className="nebula-blob absolute w-[500px] h-[500px] rounded-full opacity-20" style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.6) 0%, transparent 70%)', top: '-15%', right: '-5%', filter: 'blur(80px)' }} />
           <div className="nebula-blob-2 absolute w-[400px] h-[400px] rounded-full opacity-15" style={{ background: 'radial-gradient(circle, rgba(249,115,22,0.5) 0%, transparent 70%)', bottom: '0%', left: '-5%', filter: 'blur(80px)' }} />
           {/* Decorative stars */}
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 2 + 1,
-                height: Math.random() * 2 + 1,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.5 + 0.1,
-              }}
-            />
-          ))}
+          {Array.from({ length: 30 }, (_, starIndex) => {
+            const size = 1 + (starIndex % 2);
+
+            return (
+              <div
+                key={starIndex}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: size,
+                  height: size,
+                  top: `${(starIndex * 37) % 100}%`,
+                  left: `${(starIndex * 61) % 100}%`,
+                  opacity: 0.15 + ((starIndex * 13) % 5) * 0.1,
+                }}
+              />
+            );
+          })}
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <span className="section-label block mb-4">Got Questions?</span>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+          <h1 className="page-title mb-6">
             <span className="text-foreground">Mission</span>{' '}
             <span className="gradient-text">Briefing</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="section-copy max-w-2xl mx-auto">
             Everything you need to know before launching your brand into orbit with us. No jargon, no fluff — just straight answers.
           </p>
         </div>
@@ -169,11 +173,10 @@ export default function FAQPage() {
               <button
                 key={cat.label}
                 onClick={() => setActiveCategory(i)}
-                className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === i
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground bg-transparent'
+                className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-semibold transition-all duration-300 ${activeCategory === i
+                    ? 'border-primary/50 bg-primary/10 text-primary'
+                    : 'border-transparent bg-transparent text-muted-foreground hover:text-foreground'
                   }`}
-                style={activeCategory === i ? { background: `${cat.color}20`, border: `1px solid ${cat.color}50`, color: cat.color } : { border: '1px solid transparent' }}
               >
                 <span>{cat.icon}</span>
                 {cat.label}

@@ -125,11 +125,11 @@ export default function BlogPage() {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <span className="section-label block mb-4">Transmission Log</span>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+          <h1 className="page-title mb-6">
             <span className="text-foreground">The</span>{' '}
             <span className="gradient-text">Signal</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="section-copy max-w-2xl mx-auto">
             Marketing insights, case studies, and growth strategies from the Planets of Marketing crew. No fluff — just signals that move the needle.
           </p>
         </div>
@@ -162,8 +162,7 @@ export default function BlogPage() {
                     />
                     <div className="absolute top-4 left-4">
                       <span
-                        className="px-3 py-1 rounded-full text-xs font-semibold"
-                        style={{ background: `${post?.color}20`, color: post?.color, border: `1px solid ${post?.color}40` }}
+                        className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/30"
                       >
                         {post?.category}
                       </span>
@@ -187,7 +186,7 @@ export default function BlogPage() {
                           </span>
                         ))}
                       </div>
-                      <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200" style={{ color: post?.color }}>
+                      <span className="text-xs font-semibold text-accent flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
                         Read More
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -252,8 +251,7 @@ export default function BlogPage() {
                   />
                   <div className="absolute top-3 left-3">
                     <span
-                      className="px-2.5 py-0.5 rounded-full text-xs font-semibold"
-                      style={{ background: `${post?.color}20`, color: post?.color, border: `1px solid ${post?.color}40` }}
+                      className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/30"
                     >
                       {post?.category}
                     </span>
@@ -277,7 +275,7 @@ export default function BlogPage() {
                         </span>
                       ))}
                     </div>
-                    <span className="text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200" style={{ color: post?.color }}>
+                    <span className="text-xs font-semibold text-accent flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
                       Read
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

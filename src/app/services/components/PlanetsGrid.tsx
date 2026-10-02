@@ -220,7 +220,7 @@ export default function PlanetsGrid() {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1 flex-wrap">
-                      <span className="section-label" style={{ color: planet.color }}>{planet.planet}</span>
+                      <span className="section-label">{planet.planet}</span>
                       <span className="text-xs text-muted-foreground">•</span>
                       <span className="text-xs text-muted-foreground">{planet.tagline}</span>
                     </div>
@@ -259,8 +259,7 @@ export default function PlanetsGrid() {
                       <div className="lg:col-span-2">
                         <p className="text-base text-muted-foreground leading-relaxed mb-6">{planet.desc}</p>
                         <div
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6"
-                          style={{ background: `${planet.color}15`, color: planet.color }}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-6 bg-primary/10 text-primary"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />

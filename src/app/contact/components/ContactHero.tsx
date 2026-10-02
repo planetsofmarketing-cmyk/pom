@@ -48,11 +48,11 @@ export default function ContactHero() {
       </div>
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <span className="section-label block mb-6">Mission Control</span>
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6 leading-[1.05]">
+        <h1 className="page-title mb-6">
           Let&apos;s Chart<br />
           <span className="gradient-text">Your Course.</span>
         </h1>
-        <p className="max-w-xl mx-auto text-lg text-muted-foreground font-light leading-relaxed">
+        <p className="section-copy max-w-xl mx-auto">
           Every great mission starts with a conversation. Tell us where you want to go — we&apos;ll build the rocket to get you there.
         </p>
 

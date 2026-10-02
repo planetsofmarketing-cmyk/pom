@@ -64,12 +64,12 @@ export default function FinalCTA() {
       </div>
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <span className="section-label block mb-6">Ready for Launch?</span>
-        <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground mb-6 leading-tight">
+        <h2 className="page-title mb-6">
           Your Brand&apos;s Orbit<br />
           <span className="gradient-text">Starts Today.</span>
         </h2>
         <p className="text-lg text-muted-foreground font-light leading-relaxed mb-10 max-w-xl mx-auto">
-          Join 50+ brands that found their gravitational pull with Planets of Marketing. Your free strategy call is 20 minutes and zero obligation.
+          Join 7+ brands that found their gravitational pull with Planets of Marketing. Your free strategy call is 20 minutes and zero obligation.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

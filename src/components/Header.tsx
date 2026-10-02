@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import AppLogo from '@/components/ui/AppLogo';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -41,11 +40,15 @@ export default function Header() {
     <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 group">
-        <Image src="/assets/images/logo.png" alt="Planets of Marketing Logo" width={56} height={56} className="w-14 h-auto" />
+        <Image src="/assets/images/logo.png" alt="" width={44} height={31} className="w-11 h-auto" />
+        <span className="text-sm font-bold leading-tight text-foreground">
+          Planets
+          <span className="block text-xs font-medium text-muted-foreground">of Marketing</span>
+        </span>
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden md:flex items-center gap-8">
+      <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
         {navLinks?.map((link) => (
           <Link
             key={link?.href}
@@ -65,10 +68,10 @@ export default function Header() {
       </nav>
 
       {/* CTA */}
-      <div className="hidden md:flex items-center gap-4">
+      <div className="hidden lg:flex items-center gap-4">
         <Link
           href="/contact"
-          className="relative px-5 py-2.5 text-sm font-semibold text-foreground rounded-full border border-primary/50 hover:border-primary bg-primary/10 hover:bg-primary/20 transition-all duration-300 group overflow-hidden"
+          className="relative px-5 py-2.5 text-sm font-semibold text-foreground rounded-md border border-primary/50 hover:border-primary bg-primary/10 hover:bg-primary/20 transition-all duration-300 group overflow-hidden"
         >
           <span className="relative z-10">Get Free Strategy Call</span>
           <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
@@ -77,9 +80,12 @@ export default function Header() {
 
       {/* Hamburger */}
       <button
+        type="button"
         onClick={() => setMenuOpen(!menuOpen)}
-        className="md:hidden flex flex-col gap-1.5 p-2 z-50"
+        className="lg:hidden flex flex-col gap-1.5 p-2 z-50"
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-navigation"
       >
         <span
           className={`block h-0.5 w-6 bg-foreground transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}
@@ -93,8 +99,10 @@ export default function Header() {
       </button>
     </div>
   {/* Mobile Menu */ }
-  <div
-    className={`md:hidden fixed inset-0 bg-[rgba(11,13,26,0.97)] backdrop-blur-2xl z-40 transition-all duration-500 flex flex-col items-center justify-center gap-8 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+  <nav
+    id="mobile-navigation"
+    aria-label="Mobile navigation"
+    className={`lg:hidden fixed inset-0 bg-[rgba(11,13,26,0.97)] backdrop-blur-2xl z-40 transition-all duration-500 flex flex-col items-center justify-center gap-8 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
   >
     {navLinks?.map((link, i) => (
@@ -113,7 +121,7 @@ export default function Header() {
     >
       Get Free Strategy Call
     </Link>
-  </div>
+  </nav>
     </header >
   );
 }

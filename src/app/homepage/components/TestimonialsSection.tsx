@@ -4,33 +4,33 @@ import React, { useRef, useEffect } from 'react';
 
 const testimonials = [
   {
-    quote: 'Planets of Marketing transformed our Hyderabad restaurant&apos;s online presence completely. We went from 20 bookings a month to 200+ through Instagram and Google.',
-    name: 'Anjali Sharma',
-    role: 'Owner, The Saffron Table',
+    quote: 'Planets of Marketing helped us reach the right clients for our tax and audit services. Their focused campaign brought in relevant inquiries and turned them into real business opportunities.',
+    name: 'Clifford Charles',
+    role: 'Founder, Clifford Charles & Co.',
     rating: 5,
     planet: '🪐',
     color: '#F97316',
   },
   {
-    quote: 'Their paid ads team is exceptional. Every rupee we spent returned at least ₹4. The transparency in reporting alone is worth the partnership.',
-    name: 'Venkat Rao',
-    role: 'Director, Rao Constructions',
+    quote: 'Planets of Marketing helped us reach more farmers with our products and machinery. Their SEO, YouTube, social media, and influencer marketing built a stronger audience and made our brand more visible.',
+    name: 'Chetan Kimothi',
+    role: 'Chief Marketing Officer, AgroVista',
     rating: 5,
     planet: '🔵',
     color: '#A855F7',
   },
   {
-    quote: 'In 4 months, our LinkedIn generated 3 enterprise clients. The content strategy they designed for us is genuinely world-class.',
-    name: 'Meera Krishnan',
-    role: 'Co-Founder, HealthStack India',
+    quote: 'Planets of Marketing understood the oversized streetwear style we wanted OGCrew to represent. Their creative and marketing support helped us present our T-shirts consistently and connect with people who share our laid-back look.',
+    name: 'SriHarsha M',
+    role: 'Co-Founder, OGCrew',
     rating: 5,
     planet: '🟠',
     color: '#38BDF8',
   },
   {
-    quote: 'From zero to 50,000 Instagram followers in 8 months. Our brand now competes with national players because of their strategy.',
-    name: 'Rohan Mehta',
-    role: 'CEO, FitLife Hyderabad',
+    quote: 'Planets of Marketing helped us show customers that Scientista offers premium fragrances at accessible prices. Their work made our products’ value easier to communicate and gave our brand a clearer, more consistent presence online.',
+    name: 'Raghav Gupta',
+    role: 'Co-Founder, Scientista',
     rating: 5,
     planet: '⭐',
     color: '#10B981',
@@ -74,7 +74,7 @@ export default function TestimonialsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="section-label block mb-4">Gravitational Pull</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+          <h2 className="section-heading mb-4">
             Brands That Found Their Orbit
           </h2>
           <p className="max-w-xl mx-auto text-muted-foreground text-lg font-light">
@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <svg key={j} className="w-4 h-4" style={{ color: t.color }} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <svg key={j} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
@@ -105,8 +105,7 @@ export default function TestimonialsSection() {
 
               <div className="flex items-center gap-3">
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold"
-                  style={{ background: `${t.color}20`, color: t.color }}
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold bg-primary/10 text-primary"
                 >
                   {t.name[0]}
                 </div>

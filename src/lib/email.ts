@@ -25,7 +25,7 @@ export async function sendAdminNotification(lead: LeadData): Promise<void> {
 
   const html = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D1A; color: #F8FAFC; border-radius: 16px; overflow: hidden;">
-      <div style="background: linear-gradient(135deg, #7C3AED, #A855F7, #F97316); padding: 32px 24px; text-align: center;">
+      <div style="background: linear-gradient(135deg, #F97316, #FB923C); padding: 32px 24px; text-align: center;">
         <h1 style="margin: 0; font-size: 24px; color: #fff;">🚀 New Lead Received!</h1>
         <p style="margin: 8px 0 0; color: rgba(255,255,255,0.85); font-size: 14px;">Planets of Marketing — CRM Alert</p>
       </div>
@@ -37,7 +37,7 @@ export async function sendAdminNotification(lead: LeadData): Promise<void> {
           </tr>
           <tr>
             <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #94A3B8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Email</td>
-            <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #F8FAFC; font-size: 14px;"><a href="mailto:${lead.email}" style="color: #A855F7;">${lead.email}</a></td>
+            <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #F8FAFC; font-size: 14px;"><a href="mailto:${lead.email}" style="color: #F97316;">${lead.email}</a></td>
           </tr>
           <tr>
             <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #94A3B8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Phone</td>
@@ -85,7 +85,7 @@ export async function sendAutoReply(lead: LeadData): Promise<void> {
 
   const html = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D1A; color: #F8FAFC; border-radius: 16px; overflow: hidden;">
-      <div style="background: linear-gradient(135deg, #7C3AED, #A855F7, #F97316); padding: 32px 24px; text-align: center;">
+      <div style="background: linear-gradient(135deg, #F97316, #FB923C); padding: 32px 24px; text-align: center;">
         <h1 style="margin: 0; font-size: 24px; color: #fff;">🚀 Mission Received!</h1>
         <p style="margin: 8px 0 0; color: rgba(255,255,255,0.85); font-size: 14px;">Planets of Marketing</p>
       </div>
@@ -95,13 +95,13 @@ export async function sendAutoReply(lead: LeadData): Promise<void> {
           Thank you for reaching out to Planets of Marketing! We've received your inquiry about <strong style="color: #F97316;">${lead.serviceInterestedIn}</strong> and our team is already reviewing your mission details.
         </p>
         <p style="font-size: 14px; line-height: 1.7; color: #CBD5E1; margin: 0 0 16px;">
-          A member of our team will be in touch with you within <strong style="color: #A855F7;">24 hours</strong> with a personalized strategy recommendation.
+          A member of our team will be in touch with you within <strong style="color: #F97316;">24 hours</strong> with a personalized strategy recommendation.
         </p>
         <p style="font-size: 14px; line-height: 1.7; color: #CBD5E1; margin: 0 0 24px;">
           In the meantime, feel free to reply to this email if you have any additional details to share.
         </p>
         <div style="text-align: center; margin: 24px 0;">
-          <a href="https://planetsofmarketing.in" style="display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #7C3AED, #A855F7); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Visit Our Website</a>
+          <a href="https://planetsofmarketing.in" style="display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #F97316, #FB923C); color: #111214; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">Visit Our Website</a>
         </div>
         <p style="font-size: 14px; line-height: 1.7; color: #CBD5E1; margin: 0;">
           Best regards,<br />

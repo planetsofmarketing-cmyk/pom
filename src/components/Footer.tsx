@@ -24,9 +24,9 @@ const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
 
 export default function Footer() {
   const socialLinks = [
-    { name: 'Facebook', icon: FacebookIcon, href: 'https://facebook.com/planetsofmarketing' },
-    { name: 'Instagram', icon: InstagramIcon, href: 'https://instagram.com/planetsofmarketing' },
-    { name: 'LinkedIn', icon: LinkedinIcon, href: 'https://linkedin.com/company/planetsofmarketing' },
+    { name: 'Facebook', icon: FacebookIcon, href: 'https://www.facebook.com/profile.php?id=61581514755161' },
+    { name: 'Instagram', icon: InstagramIcon, href: 'https://www.instagram.com/planets_of_marketing/' },
+    { name: 'LinkedIn', icon: LinkedinIcon, href: 'https://www.linkedin.com/company/planets-of-marketing/home/' },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-3 max-w-xs">
             <Link href="/homepage" className="flex items-center gap-3">
-              <Image src="/assets/images/logo.png" alt="Planets of Marketing Logo" width={32} height={32} className="w-8 h-auto" />
+              <Image src="/assets/images/logo.png" alt="Planets of Marketing Logo" width={32} height={23} className="w-8 h-auto" />
               <span className="font-extrabold text-base tracking-tight text-foreground">
                 Planets of Marketing
               </span>

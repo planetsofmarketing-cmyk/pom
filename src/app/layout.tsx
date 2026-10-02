@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:4028'),
   title: {
-    default: 'Best Digital Marketing Agency in Hyderabad | SEO & PPC - Planets of Marketing',
+    default: 'Planets of Marketing',
     template: '%s | Planets of Marketing',
   },
   description: 'Planets of Marketing is the premier digital marketing agency in Hyderabad. We drive explosive business growth with SEO, Google Ads, Meta Ads, and Brand Strategy. Book a free consultation!',
@@ -52,8 +52,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/assets/images/logo.png',
   },
 };
 

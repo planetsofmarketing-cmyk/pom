@@ -314,11 +314,7 @@ export default function AdminLeadsPage() {
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full py-3 rounded-lg font-bold text-foreground transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                style={{
-                  background: 'linear-gradient(135deg, #7C3AED, #A855F7, #F97316)',
-                  boxShadow: '0 0 20px rgba(124,58,237,0.3)',
-                }}
+                className="w-full rounded-lg bg-primary py-3 font-bold text-primary-foreground transition-colors hover:bg-orange-400 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loginLoading ? 'Signing in...' : 'Sign In'}
               </button>
@@ -525,4 +521,4 @@ export default function AdminLeadsPage() {
       </div>
     </div>
   );
-}
+}

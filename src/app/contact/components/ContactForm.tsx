@@ -429,11 +429,7 @@ export default function ContactForm() {
                   <button
                     type="submit"
                     disabled={isLoading || (cooldownEnd !== null && Date.now() < cooldownEnd)}
-                    className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 mt-2 hover:shadow-[0_0_40px_rgba(124,58,237,0.5)] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-none"
-                    style={{
-                      background: 'linear-gradient(135deg, #7C3AED, #A855F7, #F97316)',
-                      boxShadow: '0 0 20px rgba(124,58,237,0.3)',
-                    }}
+                    className="w-full rounded-md bg-primary px-4 py-4 font-bold text-base text-primary-foreground transition-colors duration-300 mt-2 hover:bg-orange-400 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <span className="flex items-center justify-center gap-2">
