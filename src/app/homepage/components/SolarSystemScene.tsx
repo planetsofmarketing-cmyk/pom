@@ -10,7 +10,7 @@ import * as THREE from 'three';
 /* ------------------------------------------------------------------ */
 
 /**
- * true  -> clicking a planet zooms in, then opens that service page (same as the HTML).
+ * true  -> clicking a planet opens its matching service on the Services page.
  * false -> clicking a planet only shows the info panel + "Add to my plan" flow.
  * EDIT the `url` of each service below to match your real routes.
  */
@@ -42,17 +42,17 @@ const SUN: Body = {
   pct: 100,
   text: 'Everything orbits the plan. We start with audience research and clear goals, then point every channel at the same target.',
   tags: ['Audience research', 'Roadmap', 'Goals & KPIs'],
-  url: '/services/growth-strategy',
+  url: '/services?planet=strategy#service-strategy',
 };
 
 const PLANETS: Planet[] = [
-  { id: 'analytics', name: 'Analytics & Reporting', tag: 'Mercury', pct: 5, speed: 1.6, type: 'rock', colors: ['#8c8a86', '#5d5b58', '#b7b4ae'], text: 'Dashboards you can read in a minute. We track every lead and rupee back to the channel that earned it.', tags: ['GA4', 'Looker Studio', 'Attribution'], url: '/services/analytics-reporting' },
-  { id: 'social', name: 'Social Media', tag: 'Venus', pct: 10, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services/social-media' },
-  { id: 'content', name: 'Content Marketing', tag: 'Earth', pct: 18, speed: 0.95, type: 'earth', colors: ['#1f5fae', '#2f8f4e', '#fff'], text: 'Blogs, videos and guides that answer what your buyers search for, and keep working long after publishing.', tags: ['Blogs', 'Video', 'Lead magnets'], url: '/services/content-marketing' },
-  { id: 'email', name: 'Email & CRO', tag: 'Mars', pct: 8, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Turn visitors into customers with nurture flows and landing pages tested against real behaviour.', tags: ['Automation', 'A/B testing', 'Landing pages'], url: '/services/email-cro' },
-  { id: 'seo', name: 'SEO', tag: 'Jupiter', pct: 25, speed: 0.5, type: 'bands', colors: ['#d9b48a', '#a8714a', '#f2e1c8', '#8a5a3b'], text: 'The largest share of most plans. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services/seo' },
-  { id: 'paid', name: 'Paid Media', tag: 'Saturn', pct: 22, speed: 0.38, type: 'bands', ring: true, colors: ['#e6cf9a', '#c9a96a', '#f5ead0', '#b99454'], text: 'Google, Meta and YouTube campaigns built around cost per customer, not clicks, and scaled when they work.', tags: ['Google Ads', 'Meta Ads', 'YouTube'], url: '/services/paid-media' },
-  { id: 'branding', name: 'Branding & Design', tag: 'Neptune', pct: 12, speed: 0.28, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'Identity, messaging and visuals that make you recognisable in a crowded market before anyone clicks.', tags: ['Identity', 'Messaging', 'Creative'], url: '/services/branding-design' },
+  { id: 'analytics', name: 'Analytics & Reporting', tag: 'Mercury', pct: 5, speed: 1.6, type: 'rock', colors: ['#8c8a86', '#5d5b58', '#b7b4ae'], text: 'Dashboards you can read in a minute. We track every lead and rupee back to the channel that earned it.', tags: ['GA4', 'Looker Studio', 'Attribution'], url: '/services?planet=analytics#service-analytics' },
+  { id: 'social', name: 'Social Media', tag: 'Venus', pct: 10, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services?planet=social#service-social' },
+  { id: 'content', name: 'Content Marketing', tag: 'Earth', pct: 18, speed: 0.95, type: 'earth', colors: ['#1f5fae', '#2f8f4e', '#fff'], text: 'Blogs, videos and guides that answer what your buyers search for, and keep working long after publishing.', tags: ['Blogs', 'Video', 'Lead magnets'], url: '/services?planet=content#service-content' },
+  { id: 'email', name: 'Email & CRO', tag: 'Mars', pct: 8, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Turn visitors into customers with nurture flows and landing pages tested against real behaviour.', tags: ['Automation', 'A/B testing', 'Landing pages'], url: '/services?planet=email#service-email' },
+  { id: 'seo', name: 'SEO', tag: 'Jupiter', pct: 25, speed: 0.5, type: 'bands', colors: ['#d9b48a', '#a8714a', '#f2e1c8', '#8a5a3b'], text: 'The largest share of most plans. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services?planet=seo#service-seo' },
+  { id: 'paid', name: 'Paid Media', tag: 'Saturn', pct: 22, speed: 0.38, type: 'bands', ring: true, colors: ['#e6cf9a', '#c9a96a', '#f5ead0', '#b99454'], text: 'Google, Meta and YouTube campaigns built around cost per customer, not clicks, and scaled when they work.', tags: ['Google Ads', 'Meta Ads', 'YouTube'], url: '/services?planet=paid#service-paid' },
+  { id: 'branding', name: 'Branding & Design', tag: 'Neptune', pct: 12, speed: 0.28, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'Identity, messaging and visuals that make you recognisable in a crowded market before anyone clicks.', tags: ['Identity', 'Messaging', 'Creative'], url: '/services?planet=brand#service-brand' },
 ];
 
 const ALL: Body[] = [SUN, ...PLANETS];

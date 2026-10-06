@@ -5,9 +5,29 @@ import Link from 'next/link';
 
 const planets = [
   {
+    id: 'strategy',
+    name: 'Growth Strategy',
+    planet: 'The Sun',
+    tagline: 'The centre of every growth system.',
+    color: '#F97316',
+    glow: 'rgba(249,115,22,0.6)',
+    gradient: 'radial-gradient(circle at 30% 30%, #FED7AA 0%, #F97316 35%, #7C2D12 70%, #431407 90%)',
+    size: 112,
+    desc: 'Every channel starts with a clear plan. We align audience research, commercial goals, and measurable priorities before launch.',
+    deliverables: [
+      'Audience and market research',
+      'Growth roadmap and channel priorities',
+      'Goals, KPIs, and measurement plan',
+      'Positioning and opportunity review',
+      'Ongoing strategy sessions',
+    ],
+    result: 'A connected growth plan for every marketing channel.',
+    icon: '🎯',
+  },
+  {
     id: 'seo',
     name: 'SEO & Search Marketing',
-    planet: 'Mercury',
+    planet: 'Jupiter',
     tagline: 'The fastest planet in your orbit.',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
@@ -67,7 +87,7 @@ const planets = [
   {
     id: 'brand',
     name: 'Brand Strategy & Identity',
-    planet: 'Jupiter',
+    planet: 'Neptune',
     tagline: 'The largest gravitational force in your system.',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.6)',
@@ -87,7 +107,7 @@ const planets = [
   {
     id: 'content',
     name: 'Content Marketing',
-    planet: 'Saturn',
+    planet: 'Earth',
     tagline: 'Ringed with authority and reach.',
     color: '#10B981',
     glow: 'rgba(16,185,129,0.6)',
@@ -107,7 +127,7 @@ const planets = [
   {
     id: 'email',
     name: 'Email Marketing & Automation',
-    planet: 'Uranus',
+    planet: 'Mars',
     tagline: 'The silent force multiplier.',
     color: '#38BDF8',
     glow: 'rgba(56,189,248,0.6)',
@@ -127,7 +147,7 @@ const planets = [
   {
     id: 'web',
     name: 'Website Design & Development',
-    planet: 'Neptune',
+    planet: 'Uranus',
     tagline: 'The deep blue engine of conversion.',
     color: '#6366F1',
     glow: 'rgba(99,102,241,0.6)',
@@ -147,7 +167,7 @@ const planets = [
   {
     id: 'analytics',
     name: 'Analytics & Reporting',
-    planet: 'Pluto',
+    planet: 'Mercury',
     tagline: 'Small but essential. Nothing escapes its eye.',
     color: '#94A3B8',
     glow: 'rgba(148,163,184,0.4)',
@@ -186,6 +206,20 @@ export default function PlanetsGrid() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const planetId = new URLSearchParams(window.location.search).get('planet');
+    if (!planetId || !planets.some((planet) => planet.id === planetId)) return;
+
+    setActivePlanet(planetId);
+    const cardIndex = planets.findIndex((planet) => planet.id === planetId);
+    const card = cardsRef.current[cardIndex];
+    if (card) {
+      window.requestAnimationFrame(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  }, []);
+
   return (
     <section className="relative py-16 pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -193,6 +227,7 @@ export default function PlanetsGrid() {
           {planets.map((planet, i) => (
             <div
               key={planet.id}
+              id={`service-${planet.id}`}
               ref={(el) => { cardsRef.current[i] = el; }}
               className="opacity-0 translate-y-10 transition-all duration-700"
               style={{ transitionDelay: `${i * 60}ms` }}
