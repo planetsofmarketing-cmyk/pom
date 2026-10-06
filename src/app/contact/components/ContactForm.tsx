@@ -308,7 +308,7 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        placeholder="Priya Reddy"
+                        placeholder="John Doe"
                         className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.name ? 'border-red-500' : 'border-border'}`}
                       />
                       {errors.name && (
@@ -325,7 +325,7 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="priya@yourbrand.in"
+                        placeholder="johndoe@yourbrand.in"
                         className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.email ? 'border-red-500' : 'border-border'}`}
                       />
                       {errors.email && (
@@ -338,27 +338,29 @@ export default function ContactForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                        Phone Number
+                        Phone Number <span className="text-accent">*</span>
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
+                        required
                         placeholder="+91 98765 43210"
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
                       />
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                        Company Name
+                        Company or Website <span className="text-accent">*</span>
                       </label>
                       <input
                         type="text"
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        placeholder="Your Brand Co."
+                        required
+                        placeholder="yourbrand.com"
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
                       />
                     </div>
@@ -389,33 +391,35 @@ export default function ContactForm() {
                   {/* Budget */}
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                      Monthly Budget (INR)
+                      Monthly Budget (INR) <span className="text-accent">*</span>
                     </label>
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
+                      required
                       className="w-full bg-[#12152A] border-b border-border py-3 text-foreground focus:border-primary focus:outline-none transition-colors text-sm appearance-none rounded-none"
                     >
                       <option value="">Select a range...</option>
-                      <option value="under-25k">Under ₹25,000</option>
-                      <option value="25k-50k">₹25,000 – ₹50,000</option>
-                      <option value="50k-1l">₹50,000 – ₹1,00,000</option>
-                      <option value="1l-3l">₹1,00,000 – ₹3,00,000</option>
-                      <option value="3l+">₹3,00,000+</option>
+                      <option value="under-25k">Below ₹25,000 / month</option>
+                      <option value="25k-50k">₹25,000 – ₹50,000 / month</option>
+                      <option value="50k-1l">₹50,000 – ₹1,00,000 / month</option>
+                      <option value="1l-3l">₹1,00,000 – ₹3,00,000 / month</option>
+                      <option value="3l+">Above ₹3,00,000 / month</option>
                     </select>
                   </div>
 
                   {/* Message */}
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                      Tell Us About Your Mission
+                      Tell Us About Your Mission <span className="text-accent">*</span>
                     </label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
+                      required
                       placeholder="Describe your brand, your goals, and where you want to be in 12 months..."
                       className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm resize-none"
                     />
