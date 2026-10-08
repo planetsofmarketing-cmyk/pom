@@ -2,14 +2,14 @@
 
 import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import PlanetVisual from '@/components/ui/PlanetVisual';
 
 const services = [
   {
     name: 'SEO & Search',
-    planet: 'Mercury',
+    planet: 'Jupiter',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #FED7AA 0%, #F97316 40%, #7C2D12 80%)',
     size: 'w-16 h-16',
     desc: 'Rank #1 on Google with technical SEO and content strategies that compound over time.',
     icon: '🔍',
@@ -19,47 +19,42 @@ const services = [
     planet: 'Venus',
     color: '#A855F7',
     glow: 'rgba(168,85,247,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #E9D5FF 0%, #A855F7 40%, #4C1D95 80%)',
     size: 'w-20 h-20',
     desc: 'Build communities that convert. Instagram, LinkedIn, and Meta strategies with real engagement.',
     icon: '📡',
   },
   {
     name: 'Paid Advertising',
-    planet: 'Mars',
+    planet: 'Saturn',
     color: '#EF4444',
     glow: 'rgba(239,68,68,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #FECACA 0%, #EF4444 40%, #7F1D1D 80%)',
     size: 'w-14 h-14',
     desc: 'Google, Meta, and LinkedIn ads that spend ₹1 to make ₹3+. Precision targeting.',
     icon: '🚀',
   },
   {
     name: 'Brand Strategy',
-    planet: 'Jupiter',
+    planet: 'Uranus',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #FDE68A 0%, #F59E0B 30%, #92400E 70%, #451A03 90%)',
     size: 'w-28 h-28',
     desc: 'The largest force in your solar system. Define who you are and why clients choose you.',
     icon: '🪐',
   },
   {
     name: 'Content Marketing',
-    planet: 'Saturn',
+    planet: 'Earth',
     color: '#10B981',
     glow: 'rgba(16,185,129,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #A7F3D0 0%, #10B981 40%, #064E3B 80%)',
     size: 'w-22 h-22',
     desc: 'Blogs, videos, and copy that educate, attract, and convert your ideal clients.',
     icon: '✍️',
   },
   {
     name: 'Email Marketing',
-    planet: 'Uranus',
+    planet: 'Mars',
     color: '#38BDF8',
     glow: 'rgba(56,189,248,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #BAE6FD 0%, #38BDF8 40%, #0C4A6E 80%)',
     size: 'w-16 h-16',
     desc: 'Automated sequences and campaigns with open rates that actually open doors.',
     icon: '📧',
@@ -69,17 +64,15 @@ const services = [
     planet: 'Neptune',
     color: '#6366F1',
     glow: 'rgba(99,102,241,0.6)',
-    gradient: 'radial-gradient(circle at 35% 35%, #C7D2FE 0%, #6366F1 40%, #312E81 80%)',
     size: 'w-18 h-18',
     desc: 'Websites that load fast, look stunning, and convert visitors into paying clients.',
     icon: '🌐',
   },
   {
     name: 'Analytics',
-    planet: 'Pluto',
+    planet: 'Mercury',
     color: '#94A3B8',
     glow: 'rgba(148,163,184,0.4)',
-    gradient: 'radial-gradient(circle at 35% 35%, #E2E8F0 0%, #94A3B8 40%, #1E293B 80%)',
     size: 'w-10 h-10',
     desc: 'Real-time dashboards. No surprises, no guesswork — just clear data and clear decisions.',
     icon: '📊',
@@ -181,13 +174,7 @@ export default function ServicesPreview() {
             <div>
               <span className="section-label">Flagship Service</span>
               <div className="my-6 flex justify-center">
-                <div
-                  className="w-28 h-28 rounded-full animate-float"
-                  style={{
-                    background: services[3].gradient,
-                    boxShadow: `0 0 40px ${services[3].glow}, 0 0 80px ${services[3].glow}40`,
-                  }}
-                />
+                <PlanetVisual name={services[3].planet} size={112} className="animate-float my-6 mx-auto" />
               </div>
               <h3 className="text-2xl font-extrabold text-foreground mb-3">{services[3].name}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{services[3].desc}</p>
@@ -277,14 +264,5 @@ export default function ServicesPreview() {
 }
 
 function PlanetOrb({ service, large }: { service: typeof services[0]; large?: boolean }) {
-  const size = large ? 'w-20 h-20' : 'w-12 h-12';
-  return (
-    <div
-      className={`${size} rounded-full flex-shrink-0 group-hover:scale-110 transition-transform duration-500`}
-      style={{
-        background: service.gradient,
-        boxShadow: `0 0 20px ${service.glow}, 0 0 40px ${service.glow}40`,
-      }}
-    />
-  );
+  return <PlanetVisual name={service.planet} size={large ? 80 : 48} className="transition-transform duration-500 group-hover:scale-110" />;
 }

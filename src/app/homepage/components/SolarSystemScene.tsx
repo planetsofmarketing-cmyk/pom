@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import * as THREE from 'three';
+import { createPlanetTextureMap, type PlanetTextureType } from '@/lib/planetTextures';
 
 /* ------------------------------------------------------------------ */
 /*  CONFIG                                                             */
@@ -16,7 +17,7 @@ import * as THREE from 'three';
  */
 const REDIRECT = true;
 
-type TextureType = 'rock' | 'swirl' | 'earth' | 'bands';
+type TextureType = PlanetTextureType;
 
 type Body = {
   id: string;
@@ -47,12 +48,13 @@ const SUN: Body = {
 
 const PLANETS: Planet[] = [
   { id: 'analytics', name: 'Analytics & Reporting', tag: 'Mercury', pct: 5, speed: 1.6, type: 'rock', colors: ['#8c8a86', '#5d5b58', '#b7b4ae'], text: 'Dashboards you can read in a minute. We track every lead and rupee back to the channel that earned it.', tags: ['GA4', 'Looker Studio', 'Attribution'], url: '/services?planet=analytics#service-analytics' },
-  { id: 'social', name: 'Social Media', tag: 'Venus', pct: 10, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services?planet=social#service-social' },
-  { id: 'content', name: 'Content Marketing', tag: 'Earth', pct: 18, speed: 0.95, type: 'earth', colors: ['#1f5fae', '#2f8f4e', '#fff'], text: 'Blogs, videos and guides that answer what your buyers search for, and keep working long after publishing.', tags: ['Blogs', 'Video', 'Lead magnets'], url: '/services?planet=content#service-content' },
-  { id: 'email', name: 'Email & CRO', tag: 'Mars', pct: 8, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Turn visitors into customers with nurture flows and landing pages tested against real behaviour.', tags: ['Automation', 'A/B testing', 'Landing pages'], url: '/services?planet=email#service-email' },
-  { id: 'seo', name: 'SEO', tag: 'Jupiter', pct: 25, speed: 0.5, type: 'bands', colors: ['#d9b48a', '#a8714a', '#f2e1c8', '#8a5a3b'], text: 'The largest share of most plans. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services?planet=seo#service-seo' },
-  { id: 'paid', name: 'Paid Media', tag: 'Saturn', pct: 22, speed: 0.38, type: 'bands', ring: true, colors: ['#e6cf9a', '#c9a96a', '#f5ead0', '#b99454'], text: 'Google, Meta and YouTube campaigns built around cost per customer, not clicks, and scaled when they work.', tags: ['Google Ads', 'Meta Ads', 'YouTube'], url: '/services?planet=paid#service-paid' },
-  { id: 'branding', name: 'Branding & Design', tag: 'Neptune', pct: 12, speed: 0.28, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'Identity, messaging and visuals that make you recognisable in a crowded market before anyone clicks.', tags: ['Identity', 'Messaging', 'Creative'], url: '/services?planet=brand#service-brand' },
+  { id: 'social', name: 'Social Media', tag: 'Venus', pct: 9, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services?planet=social#service-social' },
+  { id: 'content', name: 'Content Marketing', tag: 'Earth', pct: 16, speed: 0.95, type: 'earth', colors: ['#1f5fae', '#2f8f4e', '#fff'], text: 'Blogs, videos and guides that answer what your buyers search for, and keep working long after publishing.', tags: ['Blogs', 'Video', 'Lead magnets'], url: '/services?planet=content#service-content' },
+  { id: 'email', name: 'Email & CRO', tag: 'Mars', pct: 7, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Turn visitors into customers with nurture flows and landing pages tested against real behaviour.', tags: ['Automation', 'A/B testing', 'Landing pages'], url: '/services?planet=email#service-email' },
+  { id: 'seo', name: 'SEO', tag: 'Jupiter', pct: 23, speed: 0.5, type: 'bands', colors: ['#d9b48a', '#a8714a', '#f2e1c8', '#8a5a3b'], text: 'The largest share of most plans. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services?planet=seo#service-seo' },
+  { id: 'paid', name: 'Paid Media', tag: 'Saturn', pct: 20, speed: 0.38, type: 'bands', ring: true, colors: ['#e6cf9a', '#c9a96a', '#f5ead0', '#b99454'], text: 'Google, Meta and YouTube campaigns built around cost per customer, not clicks, and scaled when they work.', tags: ['Google Ads', 'Meta Ads', 'YouTube'], url: '/services?planet=paid#service-paid' },
+  { id: 'branding', name: 'Branding & Design', tag: 'Neptune', pct: 11, speed: 0.28, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'Identity, messaging and visuals that make you recognisable in a crowded market before anyone clicks.', tags: ['Identity', 'Messaging', 'Creative'], url: '/services?planet=brand#service-brand' },
+  { id: 'web', name: 'Website Design', tag: 'Uranus', pct: 9, speed: 0.2, type: 'bands', colors: ['#9bdff2', '#4b9db7', '#d1f6ff'], text: 'Fast, conversion-focused websites that give every campaign a strong place to land and turn more visitors into leads.', tags: ['UX & UI', 'Development', 'Conversion'], url: '/services?planet=web#service-web' },
 ];
 
 const ALL: Body[] = [SUN, ...PLANETS];
@@ -78,80 +80,7 @@ const ORBIT_OPACITY_ON = 0.38;
 /* ------------------------------------------------------------------ */
 
 function makeTexture(type: TextureType, c: string[], w = 512, h = 256) {
-  const k = document.createElement('canvas');
-  k.width = w;
-  k.height = h;
-  const g = k.getContext('2d')!;
-  const rnd = (a: number, b: number) => a + Math.random() * (b - a);
-  g.fillStyle = c[0];
-  g.fillRect(0, 0, w, h);
-
-  if (type === 'bands') {
-    for (let y = 0; y < h; y += 2) {
-      g.fillStyle = c[(Math.random() * c.length) | 0];
-      g.globalAlpha = 0.18;
-      g.fillRect(0, y, w, rnd(2, 14));
-    }
-    g.globalAlpha = 0.35;
-    for (let i = 0; i < 26; i++) {
-      g.fillStyle = c[(Math.random() * c.length) | 0];
-      g.beginPath();
-      g.ellipse(rnd(0, w), rnd(0, h), rnd(20, 90), rnd(2, 7), 0, 0, 7);
-      g.fill();
-    }
-  } else if (type === 'swirl') {
-    for (let i = 0; i < 90; i++) {
-      g.globalAlpha = 0.2;
-      g.fillStyle = c[1 + (i % 2)];
-      g.beginPath();
-      g.ellipse(rnd(0, w), rnd(0, h), rnd(30, 120), rnd(6, 20), rnd(-0.4, 0.4), 0, 7);
-      g.fill();
-    }
-  } else if (type === 'earth') {
-    g.fillStyle = c[0];
-    g.fillRect(0, 0, w, h);
-    g.globalAlpha = 1;
-    g.fillStyle = c[1];
-    for (let i = 0; i < 16; i++) {
-      g.beginPath();
-      g.ellipse(rnd(0, w), rnd(30, h - 30), rnd(14, 55), rnd(10, 30), rnd(0, 3), 0, 7);
-      g.fill();
-    }
-    g.fillStyle = '#eef3f8';
-    g.fillRect(0, 0, w, 12);
-    g.fillRect(0, h - 12, w, 12);
-    g.globalAlpha = 0.5;
-    g.fillStyle = c[2];
-    for (let i = 0; i < 40; i++) {
-      g.beginPath();
-      g.ellipse(rnd(0, w), rnd(0, h), rnd(20, 70), rnd(3, 8), rnd(-0.3, 0.3), 0, 7);
-      g.fill();
-    }
-  } else {
-    // rock: noise + craters
-    for (let i = 0; i < 500; i++) {
-      g.globalAlpha = 0.12;
-      g.fillStyle = c[(Math.random() * 3) | 0];
-      g.fillRect(rnd(0, w), rnd(0, h), rnd(2, 18), rnd(2, 18));
-    }
-    for (let i = 0; i < 60; i++) {
-      const x = rnd(0, w);
-      const y = rnd(0, h);
-      const r = rnd(3, 16);
-      g.globalAlpha = 0.35;
-      g.fillStyle = c[1];
-      g.beginPath();
-      g.arc(x, y, r, 0, 7);
-      g.fill();
-      g.globalAlpha = 0.25;
-      g.fillStyle = c[2];
-      g.beginPath();
-      g.arc(x - r * 0.25, y - r * 0.25, r * 0.7, 0, 7);
-      g.fill();
-    }
-  }
-  g.globalAlpha = 1;
-  const t = new THREE.CanvasTexture(k);
+  const t = new THREE.CanvasTexture(createPlanetTextureMap(type, c, w, h));
   t.anisotropy = 4;
   return t;
 }
@@ -726,7 +655,7 @@ export default function SolarSystemScene() {
             : 'Each planet is a service, and its size shows its share of a typical growth plan. Turn the system, open a planet to read about it, then add the ones you need to your plan.'}
         </p>
         <div className="solar-tags">
-          {(selected ? selected.tags : ['7 services', '1 strategy']).map((t) => (
+          {(selected ? selected.tags : ['8 services', '1 strategy']).map((t) => (
             <b key={t}>{t}</b>
           ))}
         </div>
@@ -738,7 +667,7 @@ export default function SolarSystemScene() {
           )}
         </div>
         <div className="solar-size">
-          <strong>{!selected ? '7' : isSun ? 'Core' : `${selected.pct}%`}</strong>
+          <strong>{!selected ? '8' : isSun ? 'Core' : `${selected.pct}%`}</strong>
           <span>
             {!selected
               ? 'planets in your orbit'

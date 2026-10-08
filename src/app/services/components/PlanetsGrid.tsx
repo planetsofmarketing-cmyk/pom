@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import PlanetVisual from '@/components/ui/PlanetVisual';
 
 const planets = [
   {
@@ -11,7 +12,6 @@ const planets = [
     tagline: 'The centre of every growth system.',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #FED7AA 0%, #F97316 35%, #7C2D12 70%, #431407 90%)',
     size: 112,
     desc: 'Every channel starts with a clear plan. We align audience research, commercial goals, and measurable priorities before launch.',
     deliverables: [
@@ -31,7 +31,6 @@ const planets = [
     tagline: 'The fastest planet in your orbit.',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #FED7AA 0%, #F97316 35%, #7C2D12 70%, #431407 90%)',
     size: 64,
     desc: 'Dominate Google search results with technical SEO, keyword strategy, and content that compounds. We build organic visibility that doesn\'t disappear when you stop spending.',
     deliverables: [
@@ -51,7 +50,6 @@ const planets = [
     tagline: 'The brightest presence in the sky.',
     color: '#A855F7',
     glow: 'rgba(168,85,247,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #E9D5FF 0%, #A855F7 35%, #4C1D95 70%, #2E1065 90%)',
     size: 80,
     desc: 'Build communities that convert. We manage Instagram, LinkedIn, Facebook, and X — creating content that stops the scroll and starts conversations with your ideal clients.',
     deliverables: [
@@ -67,11 +65,10 @@ const planets = [
   {
     id: 'paid',
     name: 'Paid Advertising',
-    planet: 'Mars',
+    planet: 'Saturn',
     tagline: 'Aggressive. Targeted. Unstoppable.',
     color: '#EF4444',
     glow: 'rgba(239,68,68,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #FECACA 0%, #EF4444 35%, #7F1D1D 70%, #450A0A 90%)',
     size: 56,
     desc: 'Google Ads, Meta Ads, and LinkedIn Ads that spend ₹1 to make ₹3+. We build campaigns with ruthless precision targeting — no wasted spend, no guesswork.',
     deliverables: [
@@ -91,7 +88,6 @@ const planets = [
     tagline: 'The largest gravitational force in your system.',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #FDE68A 0%, #F59E0B 25%, #D97706 50%, #92400E 75%, #451A03 90%)',
     size: 112,
     desc: 'Your brand is your gravitational field — it determines which clients orbit you and which drift away. We define your positioning, voice, visual identity, and messaging system.',
     deliverables: [
@@ -111,7 +107,6 @@ const planets = [
     tagline: 'Ringed with authority and reach.',
     color: '#10B981',
     glow: 'rgba(16,185,129,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #A7F3D0 0%, #10B981 35%, #065F46 70%, #022C22 90%)',
     size: 88,
     desc: 'Blogs, videos, case studies, and copy that educate your audience and pull them through the funnel. Content that ranks, resonates, and converts.',
     deliverables: [
@@ -131,7 +126,6 @@ const planets = [
     tagline: 'The silent force multiplier.',
     color: '#38BDF8',
     glow: 'rgba(56,189,248,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #BAE6FD 0%, #38BDF8 35%, #0369A1 70%, #0C4A6E 90%)',
     size: 64,
     desc: 'Automated sequences that nurture leads while you sleep. Welcome flows, abandoned cart recovery, re-engagement campaigns — all designed to maximize lifetime value.',
     deliverables: [
@@ -151,7 +145,6 @@ const planets = [
     tagline: 'The deep blue engine of conversion.',
     color: '#6366F1',
     glow: 'rgba(99,102,241,0.6)',
-    gradient: 'radial-gradient(circle at 30% 30%, #C7D2FE 0%, #6366F1 35%, #3730A3 70%, #1E1B4B 90%)',
     size: 72,
     desc: 'Websites that load in under 2 seconds, look stunning on every device, and convert visitors into leads. We build on Next.js, WordPress, and Webflow.',
     deliverables: [
@@ -171,7 +164,6 @@ const planets = [
     tagline: 'Small but essential. Nothing escapes its eye.',
     color: '#94A3B8',
     glow: 'rgba(148,163,184,0.4)',
-    gradient: 'radial-gradient(circle at 30% 30%, #E2E8F0 0%, #94A3B8 35%, #475569 70%, #1E293B 90%)',
     size: 40,
     desc: 'Real-time dashboards, monthly strategy reviews, and data-driven optimizations. You always know exactly where your marketing stands and where every rupee is going.',
     deliverables: [
@@ -242,15 +234,10 @@ export default function PlanetsGrid() {
                 {/* Header row */}
                 <div className="flex items-center gap-6 p-6 md:p-8">
                   {/* Planet visual */}
-                  <div
-                    className="flex-shrink-0 rounded-full transition-transform duration-500 group-hover:scale-110"
-                    style={{
-                      width: Math.min(planet.size, 72),
-                      height: Math.min(planet.size, 72),
-                      background: planet.gradient,
-                      boxShadow: `0 0 20px ${planet.glow}, 0 0 40px ${planet.glow}40`,
-                      animation: activePlanet === planet.id ? 'float 4s ease-in-out infinite' : undefined,
-                    }}
+                  <PlanetVisual
+                    name={planet.planet}
+                    size={Math.min(planet.size, 72)}
+                    className={activePlanet === planet.id ? 'animate-float' : ''}
                   />
 
                   <div className="flex-1 min-w-0">
