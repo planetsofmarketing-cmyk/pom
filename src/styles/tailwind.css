@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #0B0D1A;
+  --background: #111214;
   --foreground: #F8FAFC;
-  --primary: #7C3AED;
-  --primary-foreground: #F8FAFC;
-  --secondary: #1A1D2E;
+  --primary: #F97316;
+  --primary-foreground: #111214;
+  --secondary: #191B1F;
   --secondary-foreground: #F8FAFC;
   --accent: #F97316;
-  --accent-foreground: #0B0D1A;
-  --muted: #1E2235;
-  --muted-foreground: #94A3B8;
-  --card: #12152A;
+  --accent-foreground: #111214;
+  --muted: #222529;
+  --muted-foreground: #A1A1AA;
+  --card: #17191D;
   --card-foreground: #F8FAFC;
-  --border: #2A2D45;
-  --input: #1E2235;
-  --ring: #7C3AED;
+  --border: #303236;
+  --input: #222529;
+  --ring: #F97316;
   --radius: 0.75rem;
   --font-sans: var(--font-plus-jakarta-sans);
 }
@@ -47,26 +47,23 @@
 }
 
 @layer components {
-  .star-field {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+  .page-title {
+    @apply text-5xl md:text-7xl font-extrabold leading-tight text-foreground;
   }
 
-  .star {
-    position: absolute;
-    border-radius: 50%;
-    background: white;
-    animation: twinkle var(--duration, 3s) ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
+  .section-heading {
+    @apply text-4xl md:text-5xl font-extrabold text-foreground;
   }
 
-  .orbital-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(168, 85, 247, 0.25);
-    animation: orbit-spin var(--speed, 20s) linear infinite;
+  .section-copy {
+    @apply text-lg md:text-xl font-light leading-relaxed text-muted-foreground;
+  }
+
+  .glass-card {
+    background: rgba(18, 21, 42, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(168, 85, 247, 0.2);
   }
 
   .planet-card {
@@ -79,17 +76,6 @@
     transform: translateY(-8px);
   }
 
-  .planet-glow {
-    filter: drop-shadow(0 0 20px var(--glow-color, rgba(124, 58, 237, 0.6)));
-  }
-
-  .glass-card {
-    background: rgba(18, 21, 42, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-  }
-
   .gradient-text {
     background: linear-gradient(135deg, #F8FAFC 0%, #A855F7 50%, #F97316 100%);
     -webkit-background-clip: text;
@@ -97,42 +83,339 @@
     background-clip: text;
   }
 
-  .cosmic-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .cosmic-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #7C3AED, #A855F7, #F97316);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .cosmic-btn:hover::before {
-    opacity: 0.15;
-  }
-
   .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--accent);
+    font-size: 0.7rem;
     font-weight: 600;
+    text-transform: uppercase;
   }
 
   .noise-overlay {
     position: fixed;
     inset: 0;
-    pointer-events: none;
     z-index: 9999;
+    pointer-events: none;
     opacity: 0.025;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   }
 }
+
+/* ======================================================================
+   REPLACE in tailwind.css (inside @layer components):
+   delete everything from `.home-hero-inner {` down to and including the
+   closing `}` of `@media (max-width: 640px) { ... }`  (the one that styles
+   .solar-label-layer / .solar-mobile-services), then paste ALL of this there.
+   Keep .page-title, .section-heading, .star-field, etc. exactly as they are.
+   ====================================================================== */
+
+  /* ---------- shared buttons (hero + solar panel) ---------- */
+  .pm-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--foreground);
+    font: 600 15px/1 var(--font-plus-jakarta-sans), system-ui, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .pm-btn:hover { border-color: rgba(255, 255, 255, 0.28); background: rgba(255, 255, 255, 0.04); }
+  .pm-btn:focus-visible { outline: 2px solid #f47a0b; outline-offset: 3px; }
+  .pm-btn-fill { background: #f47a0b; border-color: #f47a0b; color: #190c00; }
+  .pm-btn-fill:hover { background: #ff8d2b; border-color: #ff8d2b; transform: translateY(-1px); }
+  .pm-btn-lg { padding: 17px 30px; font-size: 16px; }
+  .pm-btn-ghost { color: #cfd4e2; padding: 16px 24px; }
+  .pm-btn-sm { padding: 7px 13px; font-size: 12px; font-weight: 500; border-radius: 8px; border-color: rgba(255, 255, 255, 0.12); color: #cfd4e2; }
+  .pm-btn-sm.pm-btn-fill { color: #190c00; font-weight: 600; }
+  .pm-arr { display: inline-block; transition: transform 0.2s; }
+  .pm-btn:hover .pm-arr { transform: translate(2px, -2px); }
+
+  /* ---------- hero shell ---------- */
+  .home-hero {
+    /* MATCH THESE TO YOUR NAVBAR WRAPPER (e.g. max-w-[1440px] px-6) */
+    --site-max: 1440px;
+    --site-pad: 24px;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(48, 50, 54, 0.7);
+  }
+
+  .home-hero-atmos {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(48% 62% at 70% 50%, rgba(244, 122, 11, 0.115) 0, rgba(244, 122, 11, 0.035) 45%, transparent 72%),
+      radial-gradient(40% 50% at 92% 14%, rgba(54, 84, 190, 0.15) 0, transparent 70%),
+      radial-gradient(34% 44% at 52% 100%, rgba(40, 62, 150, 0.1) 0, transparent 70%),
+      radial-gradient(40% 50% at 4% 34%, rgba(244, 122, 11, 0.045) 0, transparent 70%),
+      linear-gradient(180deg, #070a13 0, #05070e 100%);
+  }
+
+  .home-hero-stars { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .home-hero-stars i { position: absolute; border-radius: 50%; background: #fff; }
+
+  /* soft fade into the next section (uses your page background) */
+  .home-hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 90px;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, var(--background));
+  }
+
+  /* centred container: same width as navbar + the rest of the page */
+  .home-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: var(--site-max);
+    min-height: max(100svh, 700px);
+    margin-inline: auto;
+    padding: 112px var(--site-pad) 64px;
+  }
+
+  /* ---------- copy column ---------- */
+  .home-hero-copy {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 620px;
+    pointer-events: none;
+  }
+  .home-hero-copy a { pointer-events: auto; }
+
+  .home-hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 26px;
+    color: #f47a0b;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+  }
+  .home-hero-eyebrow::before { content: ""; width: 40px; height: 1px; background: #f47a0b; }
+
+  .home-hero-title {
+    color: var(--foreground);
+    font-size: clamp(36px, 4.4vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .home-hero-title span { display: block; margin-top: 0.04em; color: #f47a0b; }
+
+  .home-hero-lead {
+    max-width: 29em;
+    margin: 28px 0 36px;
+    color: #a3a9ba;
+    font-size: clamp(16px, 1.35vw, 19px);
+    line-height: 1.65;
+  }
+
+  .home-hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+
+  .home-hero-ticks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    max-width: 29em;
+    margin: 44px 0 0;
+    padding: 22px 0 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a3a9ba;
+    font-size: 14px;
+  }
+  .home-hero-ticks li::before { content: "✓"; margin-right: 9px; color: #f47a0b; font-weight: 700; }
+
+  /* ---------- solar stage (no box; fades into the hero) ---------- */
+  .home-hero-stage {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    z-index: 1;
+    width: 62%;
+  }
+
+  .solar-viz { position: absolute; inset: 0; }
+
+  .solar-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 13%), linear-gradient(180deg, #000 82%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(90deg, transparent 0, #000 13%), linear-gradient(180deg, #000 82%, transparent 100%);
+    mask-composite: intersect;
+  }
+  .solar-canvas:active { cursor: grabbing; }
+
+  .solar-labels { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+
+  .solar-lbl {
+    position: absolute;
+    left: 0; top: 0;
+    padding: 4px 6px;
+    border: 0;
+    background: none;
+    color: rgba(224, 228, 240, 0.86);
+    font: 500 12px/1 var(--font-plus-jakarta-sans), system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    pointer-events: auto;
+    text-shadow: 0 0 10px rgba(5, 8, 16, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+    transition: color 0.2s, opacity 0.25s;
+    will-change: transform;
+  }
+  .solar-lbl:hover { color: #fff; }
+  .solar-lbl.sun { font-size: 13px; font-weight: 700; color: #ffd9ae; }
+  .solar-lbl.picked { color: #f47a0b; }
+  .solar-lbl.on { color: #f47a0b; font-weight: 700; text-shadow: 0 0 12px rgba(244, 122, 11, 0.45), 0 1px 3px #000; }
+  .solar-lbl:focus-visible { outline: 2px solid #f47a0b; outline-offset: 3px; }
+  .solar-labels.has-sel .solar-lbl:not(.on) { opacity: 0.55; }
+  .solar-labels.has-sel .solar-lbl:not(.on):hover { opacity: 1; }
+
+  .solar-hint {
+    position: absolute;
+    left: 5%;
+    bottom: 40px;
+    color: rgba(163, 169, 186, 0.75);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  .solar-tools {
+    position: absolute;
+    top: 96px;
+    right: var(--site-pad);
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+
+  .solar-plan {
+    position: absolute;
+    top: 142px;
+    right: var(--site-pad);
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    width: min(440px, calc(100% - var(--site-pad) * 1.5));
+    padding: 10px 12px;
+    border: 1px solid rgba(244, 122, 11, 0.45);
+    border-radius: 12px;
+    background: rgba(10, 14, 26, 0.58);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .solar-plan > span { color: #a3a9ba; font-size: 12px; font-weight: 600; }
+  .solar-plan .pm-btn { padding: 9px 16px; font-size: 13px; }
+  .solar-tray { display: flex; flex: 1; flex-wrap: wrap; gap: 6px; }
+  .solar-chip {
+    padding: 5px 11px;
+    border: 1px solid rgba(244, 122, 11, 0.7);
+    border-radius: 20px;
+    background: rgba(244, 122, 11, 0.18);
+    color: #fff;
+    font: 500 12px var(--font-plus-jakarta-sans), system-ui, sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .solar-chip:hover { background: #f47a0b; color: #190c00; }
+
+  /* floating info text on the scene, no box */
+  .solar-info {
+    position: absolute;
+    right: var(--site-pad);
+    bottom: 34px;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "h h" "p p" "tags tags" "act size";
+    align-items: center;
+    gap: 5px 12px;
+    width: min(270px, calc(100% - var(--site-pad) * 1.5));
+    padding: 2px 0 2px 16px;
+    border-left: 1px solid rgba(244, 122, 11, 0.55);
+    text-shadow: 0 0 14px rgba(5, 8, 16, 0.95), 0 1px 3px rgba(0, 0, 0, 0.8);
+  }
+  .solar-info h2 { grid-area: h; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--foreground); }
+  .solar-info h2 em { margin-left: 8px; color: #f47a0b; font-size: 11.5px; font-style: normal; font-weight: 600; }
+  .solar-info p { grid-area: p; color: #a3a9ba; font-size: 12px; line-height: 1.55; }
+  .solar-tags { grid-area: tags; display: flex; flex-wrap: wrap; gap: 4px 12px; }
+  .solar-tags b { color: rgba(207, 212, 226, 0.75); font-size: 11px; font-weight: 500; }
+  .solar-tags b + b::before { content: "·"; margin-right: 12px; color: #f47a0b; }
+  .solar-act { grid-area: act; }
+  .solar-act .pm-btn { margin-top: 4px; }
+  .solar-size { grid-area: size; display: flex; align-items: baseline; justify-self: end; gap: 6px; margin-top: 4px; text-align: right; }
+  .solar-size strong { color: #f47a0b; font-size: 18px; font-weight: 800; letter-spacing: -0.03em; }
+  .solar-size span { max-width: 9em; color: #a3a9ba; font-size: 10.5px; line-height: 1.3; text-align: left; }
+
+  /* ---------- tablet + mobile: stack ---------- */
+  @media (max-width: 1024px) {
+    .home-hero::after { display: none; }
+
+    .home-hero-inner {
+      display: block;
+      min-height: 0;
+      padding: 104px var(--site-pad) 36px;
+    }
+    .home-hero-copy { max-width: 640px; }
+    .home-hero-ticks { margin-top: 32px; }
+
+    .home-hero-stage {
+      position: relative;
+      top: auto; right: auto; bottom: auto;
+      width: auto;
+      margin: 36px calc(var(--site-pad) * -1) 0;
+    }
+    .solar-viz { position: relative; inset: auto; height: clamp(320px, 72vw, 560px); }
+    .solar-canvas {
+      touch-action: pan-y;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 90%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 90%, transparent 100%);
+    }
+    .solar-tools { top: 10px; right: var(--site-pad); }
+    .solar-plan { top: 52px; left: var(--site-pad); right: var(--site-pad); width: auto; }
+    .solar-hint { left: 0; right: 0; bottom: 6px; text-align: center; }
+    .solar-desktop-only { display: none; }
+    .solar-info {
+      position: relative;
+      right: auto; bottom: auto;
+      width: auto;
+      margin: 6px var(--site-pad) 0;
+      padding-left: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home-hero-cta .pm-btn { flex: 1 1 100%; justify-content: center; }
+    .solar-lbl { font-size: 11px; }
+    .solar-lbl.sun { font-size: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pm-btn, .pm-arr { transition: none; }
+  }
 
 @layer utilities {
   .animate-float {
@@ -222,9 +505,9 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0B0D1A; }
-::-webkit-scrollbar-thumb { background: #2A2D45; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #7C3AED; }
+::-webkit-scrollbar-track { background: #111214; }
+::-webkit-scrollbar-thumb { background: #303236; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #F97316; }
 
 /* Selection */
 ::selection {

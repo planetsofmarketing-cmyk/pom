@@ -66,7 +66,7 @@ export default function ProcessSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="section-label block mb-4">The Launch Sequence</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+          <h2 className="section-heading mb-4">
             How We Launch Brands Into Orbit
           </h2>
           <p className="max-w-xl mx-auto text-muted-foreground text-lg font-light">
@@ -104,7 +104,7 @@ export default function ProcessSection() {
                     </div>
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs font-bold tracking-widest" style={{ color: step.color }}>{step.number}</span>
+                        <span className="text-xs font-bold text-accent">{step.number}</span>
                         <h3 className="text-lg font-bold text-foreground">{step.title}</h3>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
@@ -119,7 +119,7 @@ export default function ProcessSection() {
                     style={{
                       borderColor: step.color,
                       background: `${step.color}20`,
-                      color: step.color,
+                      color: 'var(--accent)',
                       boxShadow: `0 0 20px ${step.color}40`,
                     }}
                   >

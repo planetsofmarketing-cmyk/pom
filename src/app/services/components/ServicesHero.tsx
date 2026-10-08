@@ -26,11 +26,11 @@ export default function ServicesHero() {
       </div>
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <span className="section-label block mb-6">Our Solar System</span>
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground mb-6 leading-[1.05]">
+        <h1 className="page-title mb-6">
           8 Planets.<br />
           <span className="gradient-text">Infinite Orbits.</span>
         </h1>
-        <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground font-light leading-relaxed">
+        <p className="section-copy max-w-2xl mx-auto">
           Every service we offer is a planet in your marketing solar system — each with its own gravitational force, each perfectly positioned to pull your ideal clients into orbit.
         </p>
 

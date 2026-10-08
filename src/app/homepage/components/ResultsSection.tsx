@@ -3,35 +3,66 @@
 import React, { useEffect, useRef, useState } from 'react';
 import AppImage from '@/components/ui/AppImage';
 
-const caseStudies = [
-{
-  client: 'Hyderabad Fashion Co.',
-  industry: 'E-Commerce • Apparel',
-  challenge: 'Zero digital presence, relying entirely on walk-in traffic and word of mouth.',
-  result: '312% revenue growth',
-  metric1: { value: 312, suffix: '%', label: 'Revenue Growth' },
-  metric2: { value: 4.8, suffix: 'x', label: 'ROAS on Meta Ads' },
-  quote: 'Planets of Marketing took us from invisible to undeniable in six months.',
-  author: 'Priya Reddy',
-  role: 'Founder, Hyderabad Fashion Co.',
-  image: "https://img.rocket.new/generatedImages/rocket_gen_img_1d53c6670-1767313045322.png",
-  alt: 'Modern fashion boutique interior with warm lighting, clothing racks, and minimal dark decor',
-  color: '#F97316'
-},
-{
-  client: 'TechVenture Labs',
-  industry: 'B2B SaaS • Hyderabad',
-  challenge: 'High CAC and poor-quality inbound leads from generic Google campaigns.',
-  result: '60% lower CAC',
-  metric1: { value: 60, suffix: '%', label: 'Lower Cost Per Lead' },
-  metric2: { value: 220, suffix: '+', label: 'Qualified Leads / Month' },
-  quote: 'The SEO + paid ads combination they built for us is our biggest lead source now.',
-  author: 'Karthik Nambiar',
-  role: 'CEO, TechVenture Labs',
-  image: "https://img.rocket.new/generatedImages/rocket_gen_img_1dce3f628-1772832763694.png",
-  alt: 'Tech startup office with dark screens showing analytics dashboards, dim ambient lighting, deep blue tones',
-  color: '#A855F7'
-}];
+interface Metric {
+  value: number;
+  prefix?: string;
+  suffix: string;
+  label: string;
+}
+
+interface CaseStudy {
+  client: string;
+  industry: string;
+  challenge: string;
+  campaign?: string;
+  result: string;
+  metrics: Metric[];
+  quote: string;
+  author: string;
+  role: string;
+  image: string | null;
+  alt: string;
+  color: string;
+}
+
+const caseStudies: CaseStudy[] = [
+  {
+    client: 'Clifford Charles & Co.',
+    industry: 'ACCOUNTING & TAX • NEW YORK',
+    challenge: 'Clifford Charles & Co. wanted to generate relevant inquiries for its tax and audit services and turn digital demand into real business opportunities.',
+    campaign: 'With a focused $500 advertising campaign, we generated 6 tracked inquiries, with 3 converting into clients.',
+    result: '$500 AD SPEND • $90K REVENUE • 180× ROAS',
+    metrics: [
+      { value: 50, suffix: '%', label: 'Lead-to-client conversion rate' },
+      { value: 90, prefix: '$', suffix: 'K', label: 'Client revenue generated' },
+      { value: 180, suffix: '×', label: 'ROAS' },
+      { value: 17900, suffix: '%', label: 'ROI' },
+    ],
+    quote: 'The campaign turned a focused advertising investment into measurable client acquisition and significant business revenue.',
+    author: 'Clifford Charles & Co.',
+    role: 'New York, USA',
+    image: "https://img.rocket.new/generatedImages/rocket_gen_img_1d53c6670-1767313045322.png",
+    alt: '',
+    color: '#F97316',
+  },
+  {
+    client: 'AgroVista',
+    industry: 'AGRI-TECH • INDIA',
+    challenge: 'Building stronger visibility and engagement across the digital agriculture audience.',
+    campaign: 'We paired product-led agriculture content with SEO, YouTube, social media, and influencer marketing to put AgroVista products and machinery in front of a wider farming audience.',
+    result: 'SEO YOUTUBE • SOCIAL MEDIA • INFLUENCER MARKETING',
+    metrics: [
+      { value: 130, suffix: 'K+', label: 'YouTube subscribers' },
+      { value: 40, suffix: 'M+', label: 'Total impressions' },
+    ],
+    quote: 'We turned agricultural content into a consistent growth engine through SEO, social media and creator-led marketing.',
+    author: 'AgroVista',
+    role: 'Agricultural products & machinery · India',
+    image: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=1200&q=85',
+    alt: 'Green-and-white agricultural tractor working in a green field',
+    color: '#F97316',
+  },
+];
 
 
 function useCounter(target: number, duration: number, start: boolean) {
@@ -52,16 +83,16 @@ function useCounter(target: number, duration: number, start: boolean) {
   return count;
 }
 
-function MetricCard({ metric, started }: {metric: {value: number;suffix: string;label: string;};started: boolean;}) {
+function MetricCard({ metric, started }: { metric: Metric; started: boolean }) {
   const count = useCounter(metric.value, 1800, started);
   return (
-    <div className="text-center lg:text-left">
-      <div className="text-5xl font-extrabold text-foreground tracking-tight">
-        {count}{metric.suffix}
+    <div className="min-w-0 text-left">
+      <div className="whitespace-nowrap text-3xl font-extrabold text-foreground sm:text-4xl">
+        {metric.prefix}{new Intl.NumberFormat('en-US').format(count)}{metric.suffix}
       </div>
-      <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{metric.label}</div>
-    </div>);
-
+      <div className="mt-1 text-[10px] font-medium uppercase leading-snug text-muted-foreground sm:text-xs">{metric.label}</div>
+    </div>
+  );
 }
 
 export default function ResultsSection() {
@@ -97,7 +128,7 @@ export default function ResultsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="section-label block mb-4">Proof of Orbit</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+          <h2 className="section-heading mb-4">
             Real Brands. Real Results.
           </h2>
           <p className="max-w-xl mx-auto text-muted-foreground text-lg font-light">
@@ -114,21 +145,48 @@ export default function ResultsSection() {
             
               {/* Image + quote — 2 cols */}
               <div className={`lg:col-span-2 flex flex-col sm:flex-row gap-8 items-start ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="w-full sm:w-64 flex-shrink-0 overflow-hidden rounded-2xl aspect-[4/5]">
-                  <AppImage
-                  src={study.image}
-                  alt={study.alt}
-                  width={300}
-                  height={375}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                
-                </div>
+                {study.image ? (
+                  <div className="aspect-[4/5] w-full flex-shrink-0 overflow-hidden rounded-2xl sm:w-64">
+                    <AppImage
+                      src={study.image}
+                      alt={study.alt}
+                      width={300}
+                      height={375}
+                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative flex aspect-[4/5] w-full flex-shrink-0 flex-col justify-between overflow-hidden border border-border bg-[#111214] p-6 sm:w-64">
+                    <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(circle at 50% 45%, rgba(249,115,22,0.2), transparent 65%)' }} aria-hidden="true" />
+                    <span className="relative section-label">Campaign snapshot</span>
+                    <div className="relative">
+                      <span className="text-xs uppercase text-muted-foreground">Advertising spend</span>
+                      <p className="mt-1 text-5xl font-extrabold text-foreground">$500</p>
+                    </div>
+                    <div className="relative grid grid-cols-2 gap-4 border-t border-border pt-4">
+                      <div>
+                        <p className="text-2xl font-bold text-accent">6</p>
+                        <span className="text-[10px] uppercase text-muted-foreground">Tracked inquiries</span>
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold text-accent">3</p>
+                        <span className="text-[10px] uppercase text-muted-foreground">New clients</span>
+                      </div>
+                    </div>
+                    <span className="relative text-xs text-muted-foreground">Tax &amp; audit · New York</span>
+                  </div>
+                )}
                 <div className="flex flex-col justify-center flex-1">
-                  <span className="section-label mb-3" style={{ color: study.color }}>{study.industry}</span>
+                  <span className="section-label mb-3">{study.industry}</span>
                   <h3 className="text-2xl font-extrabold text-foreground mb-3">{study.client}</h3>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    <span className="text-foreground font-semibold">The challenge: </span>{study.challenge}
+                    <span className="text-foreground font-semibold">The brief: </span>{study.challenge}
                   </p>
+                  {study.campaign && (
+                    <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                      <span className="font-semibold text-foreground">The campaign: </span>{study.campaign}
+                    </p>
+                  )}
                   <blockquote className="text-base text-foreground/80 italic leading-relaxed border-l-2 pl-4 mb-4" style={{ borderColor: study.color }}>
                     &ldquo;{study.quote}&rdquo;
                   </blockquote>
@@ -140,15 +198,16 @@ export default function ResultsSection() {
               </div>
 
               {/* Metrics — 1 col */}
-              <div className={`glass-card rounded-2xl p-8 flex flex-col gap-8 ${idx % 2 === 1 ? 'lg:order-1' : ''}`} style={{ borderColor: `${study.color}30` }}>
-                <MetricCard metric={study.metric1} started={started[idx]} />
-                <div className="w-full h-px bg-border" />
-                <MetricCard metric={study.metric2} started={started[idx]} />
-                <div className="mt-2">
+              <div className={`glass-card rounded-2xl p-6 sm:p-8 ${idx % 2 === 1 ? 'lg:order-1' : ''}`} style={{ borderColor: `${study.color}30` }}>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-7">
+                  {study.metrics.map((metric) => (
+                    <MetricCard key={metric.label} metric={metric} started={started[idx]} />
+                  ))}
+                </div>
+                <div className="mt-7 border-t border-border pt-5">
                   <span
-                  className="inline-block px-4 py-2 rounded-full text-xs font-bold tracking-wide"
-                  style={{ background: `${study.color}20`, color: study.color }}>
-                  
+                    className="inline-block text-xs font-bold leading-relaxed text-accent sm:text-sm"
+                  >
                     {study.result}
                   </span>
                 </div>

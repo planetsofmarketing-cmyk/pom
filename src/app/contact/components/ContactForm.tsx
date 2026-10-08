@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 interface FormData {
   name: string;
@@ -224,6 +225,19 @@ export default function ContactForm() {
               Chat on WhatsApp
             </a>
 
+            <a
+              href="https://forms.gle/5aZFE8qDLTbX9GX56"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between gap-4 rounded-xl border border-border bg-card/60 px-5 py-4 transition-colors hover:border-primary/50"
+            >
+              <span>
+                <span className="block text-sm font-semibold text-foreground">Prefer a quick form?</span>
+                <span className="mt-1 block text-xs text-muted-foreground">Share your details using our Google Form.</span>
+              </span>
+              <ExternalLink size={18} className="shrink-0 text-accent" aria-hidden="true" />
+            </a>
+
             {/* Planet decoration */}
             <div className="hidden lg:flex items-center justify-center py-8" aria-hidden="true">
               <div className="relative w-48 h-48">
@@ -294,7 +308,7 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        placeholder="Priya Reddy"
+                        placeholder="John Doe"
                         className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.name ? 'border-red-500' : 'border-border'}`}
                       />
                       {errors.name && (
@@ -311,7 +325,7 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        placeholder="priya@yourbrand.in"
+                        placeholder="johndoe@yourbrand.in"
                         className={`w-full bg-transparent border-b py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm ${errors.email ? 'border-red-500' : 'border-border'}`}
                       />
                       {errors.email && (
@@ -324,27 +338,29 @@ export default function ContactForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                        Phone Number
+                        Phone Number <span className="text-accent">*</span>
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
+                        required
                         placeholder="+91 98765 43210"
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
                       />
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                        Company Name
+                        Company or Website <span className="text-accent">*</span>
                       </label>
                       <input
                         type="text"
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        placeholder="Your Brand Co."
+                        required
+                        placeholder="yourbrand.com"
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
                       />
                     </div>
@@ -375,33 +391,35 @@ export default function ContactForm() {
                   {/* Budget */}
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                      Monthly Budget (INR)
+                      Monthly Budget (INR) <span className="text-accent">*</span>
                     </label>
                     <select
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
+                      required
                       className="w-full bg-[#12152A] border-b border-border py-3 text-foreground focus:border-primary focus:outline-none transition-colors text-sm appearance-none rounded-none"
                     >
                       <option value="">Select a range...</option>
-                      <option value="under-25k">Under ₹25,000</option>
-                      <option value="25k-50k">₹25,000 – ₹50,000</option>
-                      <option value="50k-1l">₹50,000 – ₹1,00,000</option>
-                      <option value="1l-3l">₹1,00,000 – ₹3,00,000</option>
-                      <option value="3l+">₹3,00,000+</option>
+                      <option value="under-25k">Below ₹25,000 / month</option>
+                      <option value="25k-50k">₹25,000 – ₹50,000 / month</option>
+                      <option value="50k-1l">₹50,000 – ₹1,00,000 / month</option>
+                      <option value="1l-3l">₹1,00,000 – ₹3,00,000 / month</option>
+                      <option value="3l+">Above ₹3,00,000 / month</option>
                     </select>
                   </div>
 
                   {/* Message */}
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
-                      Tell Us About Your Mission
+                      Tell Us About Your Mission <span className="text-accent">*</span>
                     </label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
+                      required
                       placeholder="Describe your brand, your goals, and where you want to be in 12 months..."
                       className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm resize-none"
                     />
@@ -429,11 +447,7 @@ export default function ContactForm() {
                   <button
                     type="submit"
                     disabled={isLoading || (cooldownEnd !== null && Date.now() < cooldownEnd)}
-                    className="w-full py-4 rounded-xl font-bold text-base transition-all duration-300 mt-2 hover:shadow-[0_0_40px_rgba(124,58,237,0.5)] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-none"
-                    style={{
-                      background: 'linear-gradient(135deg, #7C3AED, #A855F7, #F97316)',
-                      boxShadow: '0 0 20px rgba(124,58,237,0.3)',
-                    }}
+                    className="w-full rounded-md bg-primary px-4 py-4 font-bold text-base text-primary-foreground transition-colors duration-300 mt-2 hover:bg-orange-400 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isLoading ? (
                       <span className="flex items-center justify-center gap-2">

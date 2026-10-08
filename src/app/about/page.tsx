@@ -44,38 +44,34 @@ const values = [
 
 const team = [
   {
-    name: 'Arjun Reddy',
-    role: 'Founder & Chief Strategist',
-    bio: 'Former growth lead at two funded startups. Built campaigns that generated ₹50Cr+ in pipeline. Obsessed with compounding growth loops.',
-    fun: 'Reads 3 marketing case studies every morning before coffee.',
-    initial: 'A',
+    name: 'Sandeep Singh Gurhar',
+    role: 'Co-Founder & Growth Lead',
+    bio: 'Shapes growth strategy across acquisition channels, bringing business goals, positioning, and campaign priorities into one focused plan.',
+    focus: 'Growth roadmaps, channel mix, and campaign priorities.',
+    initial: 'S',
     color: '#A855F7',
   },
   {
-    name: 'Priya Nair',
-    role: 'Head of Paid Media',
-    bio: 'Google & Meta certified. Managed ₹2Cr+ in monthly ad spend across e-commerce, SaaS, and local businesses.',
-    fun: 'Can spot a bad ad creative in under 3 seconds.',
-    initial: 'P',
+    name: 'Ramest Gupta',
+    role: 'Co-Founder & Market Research Lead',
+    bio: 'Studies customer needs, category trends, and competitor positioning to help brands find the right audience and opportunity.',
+    focus: 'Customer insights, competitor research, and market opportunities.',
+    initial: 'R',
     color: '#F97316',
   },
   {
-    name: 'Kiran Desai',
-    role: 'SEO & Content Lead',
-    bio: 'Ranked 40+ websites on page 1 of Google. Writes content that ranks and converts — not just one or the other.',
-    fun: 'Has a spreadsheet tracking every Google algorithm update since 2019.',
-    initial: 'K',
+    name: 'Tushar Maheshwari',
+    role: 'CTO & Analytics Lead',
+    bio: 'Leads the technology and analytics behind client growth, connecting websites, tracking, and reporting so teams can measure performance and make confident optimization decisions.',
+    focus: 'Web systems, analytics implementation, tracking, and reporting.',
+    initial: 'T',
     color: '#38BDF8',
   },
 ];
 
 const milestones = [
-  { year: '2021', event: 'Founded in Hyderabad with 3 clients and a bold vision.' },
-  { year: '2022', event: 'Crossed 20 active clients. Launched our proprietary reporting dashboard.' },
-  { year: '2023', event: 'Expanded into SEO and content. Generated ₹5Cr+ in client revenue.' },
-  { year: '2024', event: 'Became a Google Partner agency. Team grew to 12 specialists.' },
-  { year: '2025', event: 'Crossed 50 brands served. ₹12Cr+ in tracked client revenue.' },
-  { year: '2026', event: 'Launching full-service brand strategy and international campaigns.' },
+  { year: '2025', event: 'Founded Planets of Marketing to help ambitious brands build focused, full-funnel digital growth.' },
+  { year: '2026', event: 'Partnering with 7+ brands across India to grow visibility, audiences, and revenue.' },
 ];
 
 export default function AboutPage() {
@@ -145,12 +141,12 @@ export default function AboutPage() {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <span className="section-label block mb-4">Our Story</span>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+          <h1 className="page-title mb-6">
             <span className="text-foreground">We Orbit Around</span>
             <br />
             <span className="gradient-text">Your Growth.</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="section-copy max-w-2xl mx-auto">
             Planets of Marketing was born from a simple belief: every brand has a gravitational force waiting to be unleashed. We find it, amplify it, and put it to work.
           </p>
         </div>
@@ -162,18 +158,18 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="section-label block mb-4">Why We Exist</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-6 leading-tight">
+              <h2 className="section-heading mb-6">
                 Built for Brands That Refuse to Stay Small
               </h2>
               <div className="space-y-4 text-muted-foreground font-light leading-relaxed">
                 <p>
-                  In 2021, we watched too many great Hyderabad businesses get outspent by mediocre competitors with bigger budgets. The problem wasn&apos;t money — it was strategy.
+                  In 2025, we watched too many great Hyderabad & Gurugram businesses get outspent by mediocre competitors with bigger budgets. The problem wasn&apos;t money — it was strategy.
                 </p>
                 <p>
                   We founded Planets of Marketing to level the playing field. Our mission: give every ambitious brand access to the kind of data-driven, full-funnel marketing that was previously reserved for enterprise companies with massive budgets.
                 </p>
                 <p>
-                  Today, we&apos;ve helped 50+ brands across India find their orbit — from local restaurants to funded startups to established enterprises.
+                  Today, we&apos;ve helped 7+ brands across India find their orbit — from local restaurants to funded startups to established enterprises.
                 </p>
               </div>
             </div>
@@ -184,9 +180,9 @@ export default function AboutPage() {
                 <div
                   key={m.year}
                   className="glass-card rounded-xl p-4 group hover:border-primary/40 transition-all duration-300"
-                  style={{ borderLeft: `2px solid ${i % 2 === 0 ? '#A855F7' : '#F97316'}` }}
+                  style={{ borderLeft: '2px solid var(--accent)' }}
                 >
-                  <div className="text-xs font-bold mb-1" style={{ color: i % 2 === 0 ? '#A855F7' : '#F97316' }}>{m.year}</div>
+                  <div className="text-xs font-bold mb-1 text-accent">{m.year}</div>
                   <p className="text-xs text-muted-foreground leading-relaxed">{m.event}</p>
                 </div>
               ))}
@@ -227,7 +223,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <span className="section-label block mb-4">What Drives Us</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
+            <h2 className="section-heading">
               Our Core Principles
             </h2>
           </div>
@@ -255,31 +251,30 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <span className="section-label block mb-4">The Crew</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
+            <h2 className="section-heading">
               Meet the Navigators
             </h2>
             <p className="mt-4 text-muted-foreground font-light max-w-xl mx-auto">
               A tight-knit team of specialists who live and breathe growth marketing.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3">
             {team.map((member) => (
               <div
                 key={member.name}
-                className="glass-card rounded-2xl p-8 group hover:border-primary/30 transition-all duration-300"
+                className="glass-card flex h-full flex-col rounded-2xl p-8 group hover:border-primary/30 transition-all duration-300"
               >
                 <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-extrabold mb-5"
-                  style={{ background: `${member.color}20`, color: member.color, boxShadow: `0 0 20px ${member.color}30` }}
+                  className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-extrabold mb-5 bg-primary/10 text-primary"
                 >
                   {member.initial}
                 </div>
-                <h3 className="text-lg font-bold text-foreground mb-1">{member.name}</h3>
-                <p className="text-xs font-semibold mb-3" style={{ color: member.color }}>{member.role}</p>
+                <h3 className="min-h-7 text-lg font-bold text-foreground mb-1">{member.name}</h3>
+                <p className="min-h-5 text-xs font-semibold mb-3 text-accent">{member.role}</p>
                 <p className="text-sm text-muted-foreground font-light leading-relaxed mb-4">{member.bio}</p>
-                <div className="flex items-start gap-2 p-3 rounded-lg bg-white/5">
+                <div className="mt-auto flex min-h-16 items-start gap-2 rounded-lg bg-white/5 p-3">
                   <span className="text-base">✨</span>
-                  <p className="text-xs text-muted-foreground italic">{member.fun}</p>
+                  <p className="text-xs text-muted-foreground italic">{member.focus}</p>
                 </div>
               </div>
             ))}
@@ -297,7 +292,7 @@ export default function AboutPage() {
             </div>
             <div className="relative z-10">
               <span className="section-label block mb-4">Ready to Launch?</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-4">
+              <h2 className="section-heading mb-4">
                 Let&apos;s Build Your Orbit Together
               </h2>
               <p className="text-muted-foreground font-light mb-8 max-w-lg mx-auto">

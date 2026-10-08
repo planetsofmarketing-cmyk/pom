@@ -119,7 +119,7 @@ export default function ServicesPreview() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="section-label block mb-4">Our Solar System</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+          <h2 className="section-heading mb-4">
             8 Planets. One Mission.
           </h2>
           <p className="max-w-xl mx-auto text-muted-foreground text-lg font-light leading-relaxed">
@@ -179,7 +179,7 @@ export default function ServicesPreview() {
             }}
           >
             <div>
-              <span className="section-label" style={{ color: services[3].color }}>Flagship Service</span>
+              <span className="section-label">Flagship Service</span>
               <div className="my-6 flex justify-center">
                 <div
                   className="w-28 h-28 rounded-full animate-float"
@@ -194,8 +194,7 @@ export default function ServicesPreview() {
             </div>
             <Link
               href="/services"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold group/link"
-              style={{ color: services[3].color }}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent group/link"
             >
               Explore Jupiter
               <svg className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

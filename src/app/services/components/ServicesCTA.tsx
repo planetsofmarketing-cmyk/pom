@@ -14,7 +14,7 @@ export default function ServicesCTA() {
           }}
         >
           <span className="section-label block mb-4">Ready to Launch?</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground mb-6">
+          <h2 className="section-heading mb-6">
             Not sure which planets<br />
             <span className="gradient-text">your brand needs?</span>
           </h2>
