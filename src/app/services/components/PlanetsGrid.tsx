@@ -27,7 +27,7 @@ const planets = [
   {
     id: 'seo',
     name: 'SEO & Search Marketing',
-    planet: 'Jupiter',
+    planet: 'Mercury',
     tagline: 'The fastest planet in your orbit.',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
@@ -65,7 +65,7 @@ const planets = [
   {
     id: 'paid',
     name: 'Paid Advertising',
-    planet: 'Saturn',
+    planet: 'Mars',
     tagline: 'Aggressive. Targeted. Unstoppable.',
     color: '#EF4444',
     glow: 'rgba(239,68,68,0.6)',
@@ -84,7 +84,7 @@ const planets = [
   {
     id: 'brand',
     name: 'Brand Strategy & Identity',
-    planet: 'Neptune',
+    planet: 'Jupiter',
     tagline: 'The largest gravitational force in your system.',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.6)',
@@ -103,7 +103,7 @@ const planets = [
   {
     id: 'content',
     name: 'Content Marketing',
-    planet: 'Earth',
+    planet: 'Saturn',
     tagline: 'Ringed with authority and reach.',
     color: '#10B981',
     glow: 'rgba(16,185,129,0.6)',
@@ -122,7 +122,7 @@ const planets = [
   {
     id: 'email',
     name: 'Email Marketing & Automation',
-    planet: 'Mars',
+    planet: 'Uranus',
     tagline: 'The silent force multiplier.',
     color: '#38BDF8',
     glow: 'rgba(56,189,248,0.6)',
@@ -141,7 +141,7 @@ const planets = [
   {
     id: 'web',
     name: 'Website Design & Development',
-    planet: 'Uranus',
+    planet: 'Neptune',
     tagline: 'The deep blue engine of conversion.',
     color: '#6366F1',
     glow: 'rgba(99,102,241,0.6)',
@@ -160,8 +160,8 @@ const planets = [
   {
     id: 'analytics',
     name: 'Analytics & Reporting',
-    planet: 'Mercury',
-    tagline: 'Small but essential. Nothing escapes its eye.',
+    planet: 'Earth',
+    tagline: 'The ground truth beneath every growth decision.',
     color: '#94A3B8',
     glow: 'rgba(148,163,184,0.4)',
     size: 40,

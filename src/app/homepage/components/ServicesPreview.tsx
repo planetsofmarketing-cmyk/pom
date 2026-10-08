@@ -7,7 +7,7 @@ import PlanetVisual from '@/components/ui/PlanetVisual';
 const services = [
   {
     name: 'SEO & Search',
-    planet: 'Jupiter',
+    planet: 'Mercury',
     color: '#F97316',
     glow: 'rgba(249,115,22,0.6)',
     size: 'w-16 h-16',
@@ -25,7 +25,7 @@ const services = [
   },
   {
     name: 'Paid Advertising',
-    planet: 'Saturn',
+    planet: 'Mars',
     color: '#EF4444',
     glow: 'rgba(239,68,68,0.6)',
     size: 'w-14 h-14',
@@ -34,7 +34,7 @@ const services = [
   },
   {
     name: 'Brand Strategy',
-    planet: 'Uranus',
+    planet: 'Jupiter',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.6)',
     size: 'w-28 h-28',
@@ -43,7 +43,7 @@ const services = [
   },
   {
     name: 'Content Marketing',
-    planet: 'Earth',
+    planet: 'Saturn',
     color: '#10B981',
     glow: 'rgba(16,185,129,0.6)',
     size: 'w-22 h-22',
@@ -52,7 +52,7 @@ const services = [
   },
   {
     name: 'Email Marketing',
-    planet: 'Mars',
+    planet: 'Uranus',
     color: '#38BDF8',
     glow: 'rgba(56,189,248,0.6)',
     size: 'w-16 h-16',
@@ -70,7 +70,7 @@ const services = [
   },
   {
     name: 'Analytics',
-    planet: 'Mercury',
+    planet: 'Earth',
     color: '#94A3B8',
     glow: 'rgba(148,163,184,0.4)',
     size: 'w-10 h-10',
