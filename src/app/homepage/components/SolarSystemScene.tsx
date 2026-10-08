@@ -59,14 +59,27 @@ const PLANETS: Planet[] = [
 
 const ALL: Body[] = [SUN, ...PLANETS];
 
-/* planet radius from its share of a typical plan, then orbit distance / start angle */
-const radiusFromShare = (pct: number) => 0.35 + pct * 0.04;
+/* Use actual relative solar-system size logic for rendering so Mercury stays smaller and Earth reads slightly larger. */
+const PLANET_RADIUS_BY_TAG: Record<string, number> = {
+  Mercury: 0.46,
+  Venus: 0.92,
+  Earth: 1.08,
+  Mars: 0.54,
+  Jupiter: 1.9,
+  Saturn: 1.72,
+  Uranus: 1.18,
+  Neptune: 1.12,
+};
+const radiusFromPlanetTag = (tag: string) => {
+  const size = PLANET_RADIUS_BY_TAG[tag] ?? 1;
+  return 0.38 + size * 0.2;
+};
 const SUN_RADIUS = 1.9;
 const LAYOUT = (() => {
   let d = 3.6;
   return PLANETS.map((p, i) => {
-    const r = radiusFromShare(p.pct);
-    const prev = i ? radiusFromShare(PLANETS[i - 1].pct) : 0;
+    const r = radiusFromPlanetTag(p.tag);
+    const prev = i ? radiusFromPlanetTag(PLANETS[i - 1].tag) : 0;
     d += i ? prev + r + 0.6 : r;
     return { r, orbit: d * 0.84, angle: i * 2.3 + 0.6 };
   });
@@ -109,7 +122,7 @@ function makeGlow(color: string, size: number) {
 /* default camera distance: fit the outer orbit to the stage width */
 const defaultDistance = (w: number, h: number) => {
   const aspect = h ? w / h : 1.2;
-  return Math.min(80, Math.max(30, (22 / (Math.tan((21 * Math.PI) / 180) * aspect)) * 0.92));
+  return Math.min(80, Math.max(22, (22 / (Math.tan((21 * Math.PI) / 180) * aspect)) * 0.72));
 };
 
 type Live = {
@@ -298,8 +311,8 @@ export default function SolarSystemScene() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let theta = 0.5;
     let phi = 1.05;
-    let rad = 34;
-    let tR = 34;
+    let rad = 26;
+    let tR = 26;
     const tgt = new THREE.Vector3();
     const tTgt = new THREE.Vector3();
     let drag = false;
