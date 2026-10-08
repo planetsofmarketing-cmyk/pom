@@ -180,7 +180,7 @@ function makeGlow(color: string, size: number) {
 /* default camera distance: fit the outer orbit to the stage width */
 const defaultDistance = (w: number, h: number) => {
   const aspect = h ? w / h : 1.2;
-  return Math.min(80, Math.max(30, 22 / (Math.tan((21 * Math.PI) / 180) * aspect)));
+  return Math.min(80, Math.max(30, (22 / (Math.tan((21 * Math.PI) / 180) * aspect)) * 0.92));
 };
 
 type Live = {

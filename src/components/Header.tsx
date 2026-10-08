@@ -37,10 +37,10 @@ export default function Header() {
           : 'py-5 bg-transparent'
       }`}
     >
-    <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <div className="w-full max-w-[1440px] mx-auto px-6 grid grid-cols-[1fr_auto_1fr] items-center">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-3 group">
-        <Image src="/assets/images/logo.png" alt="" width={44} height={31} className="w-11 h-auto" />
+      <Link href="/" className="flex items-center gap-3 justify-self-start group">
+        <Image src="/assets/images/logo.png" alt="" width={44} height={31} className="w-11 h-[31px] object-contain" />
         <span className="text-sm font-bold leading-tight text-foreground">
           Planets
           <span className="block text-xs font-medium text-muted-foreground">of Marketing</span>
@@ -48,7 +48,7 @@ export default function Header() {
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+      <nav className="hidden lg:col-start-2 lg:flex items-center gap-8" aria-label="Main navigation">
         {navLinks?.map((link) => (
           <Link
             key={link?.href}
@@ -68,13 +68,13 @@ export default function Header() {
       </nav>
 
       {/* CTA */}
-      <div className="hidden lg:flex items-center gap-4">
+      <div className="hidden lg:col-start-3 lg:flex items-center gap-4 justify-self-end">
         <Link
           href="/contact"
-          className="relative px-5 py-2.5 text-sm font-semibold text-foreground rounded-md border border-primary/50 hover:border-primary bg-primary/10 hover:bg-primary/20 transition-all duration-300 group overflow-hidden"
+          className="relative inline-flex min-h-11 items-center justify-center px-5 text-sm font-semibold text-foreground rounded-md border border-primary/50 hover:border-primary bg-primary/10 hover:bg-primary/20 transition-all duration-300 group overflow-hidden"
         >
           <span className="relative z-10">Get Free Strategy Call</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+          <span className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md" />
         </Link>
       </div>
 
@@ -82,7 +82,7 @@ export default function Header() {
       <button
         type="button"
         onClick={() => setMenuOpen(!menuOpen)}
-        className="lg:hidden flex flex-col gap-1.5 p-2 z-50"
+        className="col-start-3 lg:hidden flex flex-col gap-1.5 p-2 justify-self-end z-50"
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={menuOpen}
         aria-controls="mobile-navigation"
