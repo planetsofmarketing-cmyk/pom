@@ -1,4 +1,5 @@
 import React from 'react';
+import PlanetVisual from '@/components/ui/PlanetVisual';
 
 export default function ServicesHero() {
   return (
@@ -36,21 +37,15 @@ export default function ServicesHero() {
 
         {/* Mini solar system visual */}
         <div className="mt-12 flex items-center justify-center gap-4 flex-wrap">
-          {['Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']?.map((name, i) => {
-            const colors = ['#F97316', '#A855F7', '#EF4444', '#F59E0B', '#10B981', '#38BDF8', '#6366F1', '#94A3B8'];
+          {['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']?.map((name, i) => {
             const sizes = [28, 36, 24, 52, 44, 32, 38, 20];
             return (
-              <div
+              <PlanetVisual
                 key={name}
-                className="rounded-full flex-shrink-0 animate-float"
-                style={{
-                  width: sizes?.[i],
-                  height: sizes?.[i],
-                  background: `radial-gradient(circle at 35% 35%, white, ${colors?.[i]}, #0B0D1A)`,
-                  boxShadow: `0 0 12px ${colors?.[i]}60`,
-                  animationDelay: `${i * 0.4}s`,
-                }}
-                title={name}
+                name={name}
+                size={sizes[i]}
+                className="animate-float"
+                style={{ animationDelay: `${i * 0.4}s` }}
               />
             );
           })}

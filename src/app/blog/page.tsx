@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PlanetVisual from '@/components/ui/PlanetVisual';
 
 const categories = ['All', 'SEO', 'Paid Ads', 'Social Media', 'Strategy', 'Case Studies'];
 
@@ -17,7 +18,7 @@ const posts = [
     readTime: '5 min read',
     date: 'Apr 15, 2026',
     featured: true,
-    planet: '🪐',
+    planet: 'Jupiter',
     color: '#A855F7',
     tags: ['Agency Selection', 'Strategy', 'Growth'],
   },
@@ -30,7 +31,7 @@ const posts = [
     readTime: '6 min read',
     date: 'Apr 10, 2026',
     featured: true,
-    planet: '🌍',
+    planet: 'Earth',
     color: '#38BDF8',
     tags: ['Trends', 'India', '2026'],
   },
@@ -42,7 +43,7 @@ const posts = [
     readTime: '5 min read',
     date: 'Apr 5, 2026',
     featured: false,
-    planet: '💫',
+    planet: 'Mercury',
     color: '#F97316',
     tags: ['ROI', 'Analytics', 'Beginners'],
   },
@@ -54,7 +55,7 @@ const posts = [
     readTime: '9 min read',
     date: 'Mar 28, 2026',
     featured: false,
-    planet: '🔴',
+    planet: 'Mars',
     color: '#EF4444',
     tags: ['Case Study', 'Restaurant', 'Instagram'],
   },
@@ -66,7 +67,7 @@ const posts = [
     readTime: '8 min read',
     date: 'Mar 20, 2026',
     featured: false,
-    planet: '🟣',
+    planet: 'Saturn',
     color: '#A855F7',
     tags: ['SEO', 'Paid Ads', 'Strategy'],
   },
@@ -78,7 +79,7 @@ const posts = [
     readTime: '7 min read',
     date: 'Mar 12, 2026',
     featured: false,
-    planet: '🟠',
+    planet: 'Venus',
     color: '#F97316',
     tags: ['Instagram', 'Social Media', 'India'],
   },
@@ -90,7 +91,7 @@ const posts = [
     readTime: '10 min read',
     date: 'Mar 5, 2026',
     featured: false,
-    planet: '🔵',
+    planet: 'Saturn',
     color: '#38BDF8',
     tags: ['Google Ads', 'Paid Ads', 'Beginners'],
   },
@@ -102,7 +103,7 @@ const posts = [
     readTime: '6 min read',
     date: 'Feb 25, 2026',
     featured: false,
-    planet: '⭐',
+    planet: 'Earth',
     color: '#10B981',
     tags: ['Content', 'B2B', 'LinkedIn'],
   },
@@ -155,13 +156,7 @@ export default function BlogPage() {
                     <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
                       <div className="absolute w-32 h-32 rounded-full" style={{ background: `radial-gradient(circle, ${post?.color}40, transparent)`, top: '10%', right: '15%', filter: 'blur(20px)' }} />
                     </div>
-                    <div
-                      className="w-24 h-24 rounded-full animate-float"
-                      style={{
-                        background: `radial-gradient(circle at 35% 35%, ${post?.color} 0%, rgba(11,13,26,0.9) 80%)`,
-                        boxShadow: `0 0 40px ${post?.color}50`,
-                      }}
-                    />
+                    <PlanetVisual name={post.planet} size={96} className="animate-float" />
                     <div className="absolute top-4 left-4">
                       <span
                         className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/30"
@@ -257,13 +252,7 @@ export default function BlogPage() {
                   className="relative h-32 flex items-center justify-center overflow-hidden"
                   style={{ background: `linear-gradient(135deg, ${post?.color}10 0%, rgba(11,13,26,0.9) 100%)` }}
                 >
-                  <div
-                    className="w-16 h-16 rounded-full"
-                    style={{
-                      background: `radial-gradient(circle at 35% 35%, ${post?.color} 0%, rgba(11,13,26,0.9) 80%)`,
-                      boxShadow: `0 0 25px ${post?.color}40`,
-                    }}
-                  />
+                  <PlanetVisual name={post.planet} size={64} />
                   <div className="absolute top-3 left-3">
                     <span
                       className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/30"
