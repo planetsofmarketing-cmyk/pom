@@ -460,7 +460,7 @@ export default function ContactForm() {
                     ) : cooldownEnd && Date.now() < cooldownEnd ? (
                       'Submitted Successfully!'
                     ) : (
-                      'Launch My Brand Into Orbit 🚀'
+                      'Launch My Brand Into Orbit'
                     )}
                   </button>
 
