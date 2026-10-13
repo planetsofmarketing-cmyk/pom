@@ -41,7 +41,7 @@ const contactInfo = [
       </svg>
     ),
     label: 'Studio',
-    value: 'Banjara Hills, Hyderabad\nTelangana 500034',
+    value: 'HITEC City, Hyderabad,\nTelangana - 500081, India',
   },
   {
     icon: (
