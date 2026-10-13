@@ -50,8 +50,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Phone',
-    value: '+91 98765 43210',
-    href: 'tel:+919876543210',
+    value: '+91-7815985804',
+    href: 'tel:+91-7815985804',
   },
   {
     icon: (
@@ -210,7 +210,7 @@ export default function ContactForm() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/917815985804"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 px-6 py-4 rounded-xl font-semibold text-foreground transition-all duration-300 hover:shadow-lg"
@@ -346,7 +346,7 @@ export default function ContactForm() {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 9XXXXXXXXX"
                         className="w-full bg-transparent border-b border-border py-3 text-foreground placeholder-muted-foreground/40 focus:border-primary focus:outline-none transition-colors text-sm"
                       />
                     </div>
