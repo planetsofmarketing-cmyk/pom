@@ -25,7 +25,7 @@ const LinkedinIcon = ({ size = 16 }: { size?: number }) => (
 export default function Footer() {
   const socialLinks = [
     { name: 'Facebook', icon: FacebookIcon, href: 'https://www.facebook.com/profile.php?id=61581514755161' },
-    { name: 'Instagram', icon: InstagramIcon, href: 'https://www.instagram.com/planets_of_marketing/' },
+    { name: 'Instagram', icon: InstagramIcon, href: 'https://www.instagram.com/planetsofmarketing.in/' },
     { name: 'LinkedIn', icon: LinkedinIcon, href: 'https://www.linkedin.com/company/planets-of-marketing/home/' },
   ];
 
