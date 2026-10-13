@@ -52,8 +52,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
+    icon: '/assets/images/logo_tab.PNG',
+    shortcut: '/assets/images/logo_tab.PNG',
     apple: '/assets/images/logo.png',
   },
 };

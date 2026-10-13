@@ -47,26 +47,39 @@ const SUN: Body = {
 };
 
 const PLANETS: Planet[] = [
-  { id: 'seo', name: 'SEO', tag: 'Mercury', pct: 23, speed: 1.6, type: 'rock', colors: ['#8c8a86', '#5d5b58', '#b7b4ae'], text: 'The fastest planet in your orbit. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services?planet=seo#service-seo' },
-  { id: 'social', name: 'Social Media', tag: 'Venus', pct: 9, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services?planet=social#service-social' },
+  { id: 'seo', name: 'SEO & Organic Growth', tag: 'Mercury', pct: 23, speed: 1.6, type: 'rock', colors: ['#8c8a86', '#5d5b58', '#b7b4ae'], text: 'The fastest planet in your orbit. Technical fixes, local search and content that earn lasting rankings.', tags: ['Technical SEO', 'Local SEO', 'Link building'], url: '/services?planet=seo#service-seo' },
+  { id: 'social', name: 'Social Media Marketing', tag: 'Venus', pct: 9, speed: 1.2, type: 'swirl', colors: ['#e8a65a', '#c76f2b', '#f6d49a'], text: 'Consistent, on-brand posting and community management that builds an audience who actually responds.', tags: ['Instagram', 'LinkedIn', 'Community'], url: '/services?planet=social#service-social' },
   { id: 'analytics', name: 'Analytics & Reporting', tag: 'Earth', pct: 5, speed: 0.95, type: 'earth', colors: ['#1f5fae', '#2f8f4e', '#fff'], text: 'The ground truth beneath every growth decision. Track every lead and rupee back to the channel that earned it.', tags: ['GA4', 'Looker Studio', 'Attribution'], url: '/services?planet=analytics#service-analytics' },
-  { id: 'paid', name: 'Paid Advertising', tag: 'Mars', pct: 20, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Aggressive. Targeted. Unstoppable. Google, Meta and YouTube campaigns scaled around cost per customer, not clicks.', tags: ['Google Ads', 'Meta Ads', 'YouTube'], url: '/services?planet=paid#service-paid' },
+  { id: 'paid', name: 'Paid and AI Search Marketing', tag: 'Mars', pct: 20, speed: 0.78, type: 'rock', colors: ['#b2482a', '#7a2c18', '#d98a5f'], text: 'Aggressive. Targeted. Unstoppable. Google, Meta and AI-search strategies scaled around cost per customer, not clicks.', tags: ['Google Ads', 'Meta Ads', 'AI Search'], url: '/services?planet=paid#service-paid' },
   { id: 'branding', name: 'Brand Strategy & Identity', tag: 'Jupiter', pct: 11, speed: 0.5, type: 'bands', colors: ['#d9b48a', '#a8714a', '#f2e1c8', '#8a5a3b'], text: 'The largest gravitational force in your system. Positioning, voice, visuals and messaging that make your brand distinct.', tags: ['Positioning', 'Identity', 'Messaging'], url: '/services?planet=brand#service-brand' },
   { id: 'content', name: 'Content Marketing', tag: 'Saturn', pct: 16, speed: 0.38, type: 'bands', ring: true, colors: ['#e6cf9a', '#c9a96a', '#f5ead0', '#b99454'], text: 'Ringed with authority and reach. Blogs, videos and guides that answer what buyers search for and keep working long after publishing.', tags: ['Blogs', 'Video', 'Lead magnets'], url: '/services?planet=content#service-content' },
   { id: 'email', name: 'Email Marketing & Automation', tag: 'Uranus', pct: 7, speed: 0.28, type: 'bands', colors: ['#9bdff2', '#4b9db7', '#d1f6ff'], text: 'The silent force multiplier. Automated email journeys that nurture leads and turn more visitors into customers.', tags: ['Automation', 'A/B testing', 'Landing pages'], url: '/services?planet=email#service-email' },
-  { id: 'web', name: 'Website Design', tag: 'Neptune', pct: 9, speed: 0.2, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'The deep blue engine of conversion. Fast, focused websites that give every campaign a strong place to land.', tags: ['UX & UI', 'Development', 'Conversion'], url: '/services?planet=web#service-web' },
+  { id: 'web', name: 'Website Design & Development', tag: 'Neptune', pct: 9, speed: 0.2, type: 'bands', colors: ['#2e5be0', '#1c3a9e', '#6f95ff'], text: 'The deep blue engine of conversion. Fast, focused websites that give every campaign a strong place to land.', tags: ['UX & UI', 'Development', 'Conversion'], url: '/services?planet=web#service-web' },
 ];
 
 const ALL: Body[] = [SUN, ...PLANETS];
 
-/* planet radius from its share of a typical plan, then orbit distance / start angle */
-const radiusFromShare = (pct: number) => 0.35 + pct * 0.04;
+/* Use actual relative solar-system size logic for rendering so Mercury stays smaller and Earth reads slightly larger. */
+const PLANET_RADIUS_BY_TAG: Record<string, number> = {
+  Mercury: 0.46,
+  Venus: 0.92,
+  Earth: 1.08,
+  Mars: 0.54,
+  Jupiter: 1.9,
+  Saturn: 1.72,
+  Uranus: 1.18,
+  Neptune: 1.12,
+};
+const radiusFromPlanetTag = (tag: string) => {
+  const size = PLANET_RADIUS_BY_TAG[tag] ?? 1;
+  return 0.38 + size * 0.2;
+};
 const SUN_RADIUS = 1.9;
 const LAYOUT = (() => {
   let d = 3.6;
   return PLANETS.map((p, i) => {
-    const r = radiusFromShare(p.pct);
-    const prev = i ? radiusFromShare(PLANETS[i - 1].pct) : 0;
+    const r = radiusFromPlanetTag(p.tag);
+    const prev = i ? radiusFromPlanetTag(PLANETS[i - 1].tag) : 0;
     d += i ? prev + r + 0.6 : r;
     return { r, orbit: d * 0.84, angle: i * 2.3 + 0.6 };
   });
@@ -109,7 +122,7 @@ function makeGlow(color: string, size: number) {
 /* default camera distance: fit the outer orbit to the stage width */
 const defaultDistance = (w: number, h: number) => {
   const aspect = h ? w / h : 1.2;
-  return Math.min(80, Math.max(30, (22 / (Math.tan((21 * Math.PI) / 180) * aspect)) * 0.92));
+  return Math.min(80, Math.max(22, (22 / (Math.tan((21 * Math.PI) / 180) * aspect)) * 0.72));
 };
 
 type Live = {
@@ -298,8 +311,8 @@ export default function SolarSystemScene() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let theta = 0.5;
     let phi = 1.05;
-    let rad = 34;
-    let tR = 34;
+    let rad = 26;
+    let tR = 26;
     const tgt = new THREE.Vector3();
     const tTgt = new THREE.Vector3();
     let drag = false;
