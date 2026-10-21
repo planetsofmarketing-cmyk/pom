@@ -16,6 +16,7 @@ interface LeadData {
   serviceInterestedIn: string;
   monthlyBudgetINR?: string;
   mission?: string;
+  source?: string;
   createdAt: string;
 }
 
@@ -54,6 +55,10 @@ export async function sendAdminNotification(lead: LeadData): Promise<void> {
           <tr>
             <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #94A3B8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Budget</td>
             <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #F8FAFC; font-size: 14px;">${lead.monthlyBudgetINR || '—'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #94A3B8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Source</td>
+            <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #F8FAFC; font-size: 14px;">${lead.source || 'website'}</td>
           </tr>
           <tr>
             <td style="padding: 12px 8px; border-bottom: 1px solid #2A2D45; color: #94A3B8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Mission</td>
@@ -95,7 +100,7 @@ export async function sendAutoReply(lead: LeadData): Promise<void> {
           Thank you for reaching out to Planets of Marketing! We've received your inquiry about <strong style="color: #F97316;">${lead.serviceInterestedIn}</strong> and our team is already reviewing your mission details.
         </p>
         <p style="font-size: 14px; line-height: 1.7; color: #CBD5E1; margin: 0 0 16px;">
-          A member of our team will be in touch with you within <strong style="color: #F97316;">24 hours</strong> with a personalized strategy recommendation.
+          Our team will get back to you shortly with a personalized strategy recommendation.
         </p>
         <p style="font-size: 14px; line-height: 1.7; color: #CBD5E1; margin: 0 0 24px;">
           In the meantime, feel free to reply to this email if you have any additional details to share.

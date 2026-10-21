@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import Script from 'next/script';
+import OrbitGuide from '@/components/OrbitGuide';
 import '../styles/tailwind.css';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -107,6 +108,7 @@ export default function RootLayout({
           />
         </noscript>
         {children}
+        <OrbitGuide />
       </body>
     </html>
   );
