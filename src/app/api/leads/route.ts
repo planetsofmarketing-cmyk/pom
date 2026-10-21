@@ -21,8 +21,8 @@ const formBudgets: Record<string, string> = {
   'under-25k': 'Below ₹25,000 / month',
   '25k-50k': '₹25,000 – ₹50,000 / month',
   '50k-1l': '₹50,000 – ₹1,00,000 / month',
-  '1l-3l': 'Above ₹1,00,000 / month',
-  '3l+': 'Above ₹1,00,000 / month',
+  '1l-3l': '₹1,00,000 – ₹3,00,000 / month',
+  '3l+': 'Above ₹3,00,000 / month',
 };
 
 function sanitize(value: unknown): string {
@@ -132,6 +132,10 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
+    if (body.source === 'chatbot' && body.consent !== true) {
+      return NextResponse.json({ error: 'Consent is required for chatbot submissions.' }, { status: 400 });
+    }
+
     // Honeypot check — if filled, reject silently (return success to fool bots)
     if (body.website) {
       return NextResponse.json({ success: true });
@@ -169,6 +173,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Please select a monthly budget.' }, { status: 400 });
     }
 
+    const source = body.source === 'chatbot' ? 'chatbot' : 'website';
+    const taggedMission = source === 'chatbot' ? `[Pixie chatbot]\n${mission}` : mission;
     const leadData = {
       name,
       email,
@@ -176,29 +182,44 @@ export async function POST(request: NextRequest) {
       companyName,
       serviceInterestedIn,
       monthlyBudgetINR: formBudgets[monthlyBudgetINR],
-      mission,
-      source: 'website',
+      mission: taggedMission,
+      source,
     };
 
-    await submitToGoogleForm({
-      name,
-      email,
-      phone,
-      company: companyName,
-      service: serviceInterestedIn,
-      budget: monthlyBudgetINR,
-      message: mission,
-    });
+    let googleFormFailure: unknown;
+    try {
+      await submitToGoogleForm({
+        name,
+        email,
+        phone,
+        company: companyName,
+        service: serviceInterestedIn,
+        budget: monthlyBudgetINR,
+        message: taggedMission,
+      });
+    } catch (error) {
+      if (source !== 'chatbot') throw error;
+      googleFormFailure = error;
+    }
 
     const createdAt = new Date().toISOString();
     const emailData = { ...leadData, createdAt };
 
-    await Promise.allSettled([
+    const [adminEmailResult] = await Promise.allSettled([
       sendAdminNotification(emailData),
       sendAutoReply(emailData),
     ]);
 
-    return NextResponse.json({ success: true });
+    const adminEmailSent = Boolean(process.env.EMAIL_USER) && adminEmailResult.status === 'fulfilled';
+    if (googleFormFailure && !adminEmailSent) {
+      throw googleFormFailure;
+    }
+
+    if (googleFormFailure) {
+      console.error('Pixie lead sent by email because Google Forms rejected it.', googleFormFailure);
+    }
+
+    return NextResponse.json({ success: true, emailFallback: Boolean(googleFormFailure) });
   } catch (err) {
     console.error('Lead submission error:', err);
     return NextResponse.json(

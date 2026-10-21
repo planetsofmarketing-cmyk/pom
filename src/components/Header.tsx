@@ -30,10 +30,13 @@ export default function Header() {
   }, [pathname]);
 
   return (
+      <>
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? 'py-3 bg-[rgba(11,13,26,0.92)] backdrop-blur-xl border-b border-[rgba(42,45,69,0.8)] shadow-[0_4px_40px_rgba(0,0,0,0.4)]'
+          ? menuOpen
+            ? 'py-3 bg-[rgba(11,13,26,0.98)] border-b border-[rgba(42,45,69,0.8)] shadow-[0_4px_40px_rgba(0,0,0,0.4)]'
+            : 'py-3 bg-[rgba(11,13,26,0.92)] backdrop-blur-xl border-b border-[rgba(42,45,69,0.8)] shadow-[0_4px_40px_rgba(0,0,0,0.4)]'
           : 'py-5 bg-transparent'
       }`}
     >
@@ -98,6 +101,7 @@ export default function Header() {
         />
       </button>
     </div>
+    </header>
   {/* Mobile Menu */ }
   <nav
     id="mobile-navigation"
@@ -122,6 +126,6 @@ export default function Header() {
       Get Free Strategy Call
     </Link>
   </nav>
-    </header >
+    </>
   );
 }
